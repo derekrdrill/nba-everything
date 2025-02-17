@@ -18,9 +18,15 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@*": ["*"],
+      "@client/*": ["client/*"],
+      "@components/*": ["app/components/*"],
+      "@nba-everything/*": ["app/nba-everything/*"],
+      "@public/*": ["public/*"],
+      "@types/*": ["types/*"],
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

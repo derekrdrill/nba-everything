@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import useNBAEverythingStore from '@store/useNBAEverything/useNBAEverything';
@@ -32,6 +33,12 @@ export default function NBAEverythingTeamSearch() {
     label: team.full_name,
     value: team.id.toString(),
   }));
+
+  useEffect(() => {
+    if (currentTeamsData) {
+      setSelectedTeam(currentTeamsData[0]);
+    }
+  }, [currentTeamsData]);
 
   return (
     <SearchBar

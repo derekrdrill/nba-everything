@@ -2,7 +2,11 @@
 
 import queryClient from '@client/queryClient';
 import { QueryClientProvider as NBAEverythingClientProvider } from '@tanstack/react-query';
-import { NBAEverythingSeasonSearch, NBAEverythingTeamSearch } from '@nba-everything/components';
+import {
+  NBAEverythingGames,
+  NBAEverythingSeasonSearch,
+  NBAEverythingTeamSearch,
+} from '@nba-everything/components';
 
 export default function NBAEverything() {
   return (
@@ -11,6 +15,7 @@ export default function NBAEverything() {
         <NBAEverythingTeamSearch />
         <NBAEverythingSeasonSearch />
       </div>
+      <NBAEverythingGames />
     </NBAEverythingClientProvider>
   );
 }

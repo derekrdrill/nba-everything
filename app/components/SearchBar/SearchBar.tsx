@@ -6,11 +6,12 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 interface SearchBarProps {
   handleOptionSelect?: (value: string) => void;
-  size?: 'sm' | 'md' | 'lg';
   options?: {
     label: string;
     value: string;
   }[];
+  rounded?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   variant?: 'standard' | 'static' | 'outlined';
   value?: string;
 }
@@ -18,6 +19,7 @@ interface SearchBarProps {
 export default function SearchBar({
   handleOptionSelect,
   options,
+  rounded = 'md',
   size = 'md',
   value,
 }: SearchBarProps) {
@@ -27,12 +29,18 @@ export default function SearchBar({
     <div className='w-full'>
       <Listbox disabled={!options?.length} onChange={handleOptionSelect} value={value}>
         <ListboxButton
-          className={classNames('border border-gray-300 cursor-pointer rounded-md w-full', {
-            'bg-gray-100 cursor-not-allowed': !hasOptionsLoaded,
-            'h-10': size === 'sm',
-            'h-12': size === 'md',
-            'h-14': size === 'lg',
-          })}
+          className={classNames(
+            'bg-gray-200 border border-gray-400 cursor-pointer w-full hover:border-gray-600',
+            {
+              'bg-gray-100 cursor-not-allowed': !hasOptionsLoaded,
+              'h-10': size === 'sm',
+              'h-12': size === 'md',
+              'h-14': size === 'lg',
+              'rounded-md': rounded === 'sm',
+              'rounded-lg': rounded === 'md',
+              'rounded-xl': rounded === 'lg',
+            },
+          )}
           disabled={!hasOptionsLoaded}
         >
           <div className='flex justify-between mx-2'>
@@ -46,7 +54,7 @@ export default function SearchBar({
             )}
           </div>
         </ListboxButton>
-        <ListboxOptions className='border-2 border-gray-100 max-h-96 overflow-auto rounded-b-md'>
+        <ListboxOptions className='absolute bg-white border-2 border-gray-100 max-h-96 overflow-auto rounded-b-md z-10'>
           {options?.map(option => (
             <ListboxOption
               className='border-b-2 border-gray-100 cursor-pointer p-2 w-full hover:bg-blue-200'

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
@@ -6,27 +5,10 @@ import useNBAEverythingStore from '@store/useNBAEverything/useNBAEverything';
 import { SearchBar } from '@app/components';
 import { NBATeam } from '@types';
 
-const getCurrentTeams = async (): Promise<NBATeam[] | undefined> => {
-  const teamOptions = {
-    method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/teams/current`,
-  };
-
-  try {
-    const response = await axios.request(teamOptions);
-
-    return response.data.data;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to fetch current teams');
-  }
-};
-
 export default function NBAEverythingTeamSearch() {
   const { selectedTeam, setSelectedTeam } = useNBAEverythingStore();
-  const { data: currentTeamsData } = useQuery({
+  const { data: currentTeamsData } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
-    queryFn: getCurrentTeams,
   });
 
   const searchBarTeamOptions = currentTeamsData?.map(team => ({
@@ -35,7 +17,7 @@ export default function NBAEverythingTeamSearch() {
   }));
 
   useEffect(() => {
-    if (currentTeamsData) {
+    if (currentTeamsData && !selectedTeam) {
       setSelectedTeam(currentTeamsData[0]);
     }
   }, [currentTeamsData]);

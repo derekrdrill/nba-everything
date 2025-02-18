@@ -4,7 +4,7 @@ import NBAEverythingLayout from './nba-everything/layout/NBAEverythingLayout';
 export default async function Index() {
   return (
     <NBAEverythingLayout>
-      <NBAEverything />;
+      <NBAEverything />
     </NBAEverythingLayout>
   );
 }

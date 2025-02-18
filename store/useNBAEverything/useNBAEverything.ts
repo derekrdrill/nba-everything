@@ -9,6 +9,7 @@ type NBAEverythingState = {
 };
 
 const useNBAEverythingStore = create<NBAEverythingState>(set => ({
+  selectedSeason: 2024,
   setSelectedTeam: team => set({ selectedTeam: team }),
   setSelectedSeason: season => set({ selectedSeason: season }),
 }));

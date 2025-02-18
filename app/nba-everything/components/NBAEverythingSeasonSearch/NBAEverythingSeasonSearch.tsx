@@ -1,10 +1,8 @@
 import { SearchBar } from '@app/components';
 import { useNBAEverythingStore } from '@store';
-
-type NBAEverythingSeasonSearchProps = {};
 import { NBA_SEASONS } from '@nba-everything/components/NBAEverythingSeasonSearch/constants';
 
-export default function NBAEverythingSeasonSearch({}: NBAEverythingSeasonSearchProps) {
+export default function NBAEverythingSeasonSearch() {
   const { selectedSeason, setSelectedSeason } = useNBAEverythingStore();
 
   const searchBarSeasonOptions = NBA_SEASONS.map(season => ({

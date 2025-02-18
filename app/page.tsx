@@ -1,5 +1,10 @@
-import NBAEverything from '@app/nba-everything/NBAEverything';
+import NBAEverything from './nba-everything/NBAEverything';
+import NBAEverythingLayout from './nba-everything/layout/NBAEverythingLayout';
 
 export default async function Index() {
-  return <NBAEverything />;
+  return (
+    <NBAEverythingLayout>
+      <NBAEverything />
+    </NBAEverythingLayout>
+  );
 }

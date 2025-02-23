@@ -1,19 +1,9 @@
 import type { Metadata } from 'next';
-// import { Geist, Geist_Mono } from "next/font/google";
-import 'styles/globals.css';
-import { Header } from '@app/components';
-import NBAEverything from './nba-everything/NBAEverything';
-import NBAEverythingLayout from './nba-everything/layout/NBAEverythingLayout';
+import { Header } from '@components/common';
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+import NBAEverythingClient from '@app/_client/NBAEverythingClient';
+import NBAEverything from '@components/nba-everything';
+import '@styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'NBA Everything',
@@ -29,10 +19,10 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Header />
-        <NBAEverythingLayout>
+        <NBAEverythingClient>
           <NBAEverything />
           {children}
-        </NBAEverythingLayout>
+        </NBAEverythingClient>
       </body>
     </html>
   );

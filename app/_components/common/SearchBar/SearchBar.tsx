@@ -6,6 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 interface SearchBarProps {
   handleOptionSelect?: (value: string) => void;
+  isDisabled?: boolean;
   options?: {
     label: string;
     value: string;
@@ -18,6 +19,7 @@ interface SearchBarProps {
 
 export default function SearchBar({
   handleOptionSelect,
+  isDisabled,
   options,
   rounded = 'md',
   size = 'md',
@@ -27,12 +29,12 @@ export default function SearchBar({
 
   return (
     <div className='w-full'>
-      <Listbox disabled={!options?.length} onChange={handleOptionSelect} value={value}>
+      <Listbox disabled={isDisabled} onChange={handleOptionSelect} value={value}>
         <ListboxButton
           className={classNames(
             'bg-gray-200 border border-gray-400 cursor-pointer w-full hover:border-gray-600',
             {
-              'bg-gray-100 cursor-not-allowed': !hasOptionsLoaded,
+              'bg-gray-300 cursor-not-allowed pointer-events-none text-gray-500': isDisabled,
               'h-10': size === 'sm',
               'h-12': size === 'md',
               'h-14': size === 'lg',
@@ -41,7 +43,7 @@ export default function SearchBar({
               'rounded-xl': rounded === 'lg',
             },
           )}
-          disabled={!hasOptionsLoaded}
+          disabled={isDisabled}
         >
           <div className='flex justify-between mx-2'>
             {hasOptionsLoaded ? (

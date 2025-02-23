@@ -19,7 +19,7 @@ export default function NBAEverythingTeamLogo({ height, team, width }: NBAEveryt
   const teamName = team?.full_name.replaceAll('_', '').replace(/\s/g, '') || '';
 
   return (
-    <Image
+    <img
       src={getLogoSrc({ teamName })}
       alt={team?.full_name || ''}
       width={width ?? 20}

@@ -13,6 +13,7 @@ export default function NBAEverythingTeamSearch() {
   });
 
   const { isPending: isCurrentTeamSeasonPending } = useQuery<NBATeamStats>({
+    enabled: !!(selectedTeam?.id && selectedSeason),
     queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
   });
 

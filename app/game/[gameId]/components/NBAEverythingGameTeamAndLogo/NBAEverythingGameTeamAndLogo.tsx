@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useNBAEverythingStore } from '@store';
-import { NBAEverythingTeamLogo } from '@app/nba-everything/components';
+import { NBAEverythingTeamLogo } from '@components/nba-everything';
 
 type NBAEverythingGameTeamAndLogoProps = {
   homeOrVisitor: 'home' | 'visitor';

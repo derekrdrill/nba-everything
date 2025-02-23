@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#ffffff',
-        foreground: '#171717',
+        // background: '#ffffff',
+        // foreground: '#171717',
         navy: '#000080',
       },
       fontSize: {

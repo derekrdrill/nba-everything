@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useNBAEverythingStore } from '@store';
 import { NBAEverythingTeamLogo } from '@app/nba-everything/components';
 
@@ -17,7 +18,11 @@ export default function NBAEverythingGameTeamAndLogo({
         team={selectedGame?.[`${homeOrVisitor}_team`]}
         width={75}
       />
-      <h2 className='text-lg text-right'>
+      <h2
+        className={classNames('text-lg', {
+          'text-right': homeOrVisitor === 'home',
+        })}
+      >
         {selectedGame?.[`${homeOrVisitor}_team`]?.abbreviation}
       </h2>
     </div>

@@ -41,25 +41,25 @@ export default function NBAEverythingTeamGame({
       <div className='flex flex-col gap-2'>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': game?.win && game.visitor_team.id === selectedTeam?.id,
-            'text-red-500': !game?.win && game?.visitor_team.id === selectedTeam?.id,
+            'text-green-500': game?.win && game.visitor_team?.id === selectedTeam?.id,
+            'text-red-500': !game?.win && game?.visitor_team?.id === selectedTeam?.id,
           })}
         >
           <div className='flex gap-3'>
             <NBAEverythingTeamLogo team={game?.visitor_team} />
-            <p>{game?.visitor_team.abbreviation}</p>
+            <p>{game?.visitor_team?.abbreviation}</p>
           </div>
           <p>{game?.visitor_team_score}</p>
         </div>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': game?.win && game?.home_team.id === selectedTeam?.id,
-            'text-red-500': !game?.win && game?.home_team.id === selectedTeam?.id,
+            'text-green-500': game?.win && game?.home_team?.id === selectedTeam?.id,
+            'text-red-500': !game?.win && game?.home_team?.id === selectedTeam?.id,
           })}
         >
           <div className='flex gap-3'>
             <NBAEverythingTeamLogo team={game?.home_team} />
-            <p>{game?.home_team.abbreviation}</p>
+            <p>{game?.home_team?.abbreviation}</p>
           </div>
           <p>{game?.home_team_score}</p>
         </div>

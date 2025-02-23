@@ -72,8 +72,8 @@ export default function NBAEverything() {
         <div className='col-span-full md:col-span-1'>
           {isCurrentTeamSeasonAvgsPending && (
             <div className='flex gap-8'>
-              <ShimmerDiv height={400} loading mode='light' width={'18%'} />
-              <ShimmerDiv height={400} loading mode='light' width={'82%'} />
+              <ShimmerDiv className='rounded' height={400} loading mode='light' width={'18%'} />
+              <ShimmerDiv className='rounded' height={400} loading mode='light' width={'82%'} />
             </div>
           )}
           {!isCurrentTeamSeasonAvgsPending && (

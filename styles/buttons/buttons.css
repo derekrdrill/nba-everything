@@ -1,0 +1,78 @@
+/* button sizes */
+.btn-sm {
+    @apply rounded-md py-1 px-2 text-xs
+}
+
+.btn-md {
+    @apply rounded-lg py-1.5 px-4 text-sm
+}
+
+.btn-lg {
+    @apply rounded-xl py-2 px-6 text-xl
+}
+
+/* button styles */
+.btn-primary {
+    @apply bg-emerald-500 text-white data-[hover]:bg-emerald-700 data-[active]:bg-emerald-700
+}
+
+.btn-secondary {
+    @apply bg-sky-500 text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700
+}
+
+.btn-primary-outline {
+    @apply border-[1px] text-emerald-700 !border-emerald-700 data-[hover]:bg-emerald-700 data-[hover]:text-white
+}
+
+.btn-secondary-outline {
+    @apply border-[1px] text-sky-500 !border-sky-500 data-[hover]:bg-sky-500 data-[hover]:text-white
+}
+
+/* button variations */
+.btn-primary-sm {
+    @apply btn-sm btn-primary
+}
+
+.btn-primary-sm-outline {
+    @apply btn-sm btn-primary-outline
+}
+
+.btn-primary-md {
+    @apply btn-md btn-primary
+}
+
+.btn-primary-md-outline {
+    @apply btn-md btn-primary-outline
+}
+
+.btn-primary-lg {
+    @apply btn-lg btn-primary
+}
+
+.btn-primary-lg-outline {
+    @apply btn-lg btn-primary-outline
+}
+
+.btn-secondary-sm {
+    @apply btn-sm btn-secondary
+}
+
+.btn-secondary-sm-outline {
+    @apply btn-sm btn-secondary-outline
+}
+
+.btn-secondary-md {
+    @apply btn-md btn-secondary
+}
+
+.btn-secondary-md-outline {
+    @apply btn-md btn-secondary-outline
+}
+
+.btn-secondary-lg {
+    @apply btn-lg btn-secondary
+}
+
+.btn-secondary-lg-outline {
+    @apply btn-lg btn-secondary-outline
+}

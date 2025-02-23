@@ -1,0 +1,16 @@
+.game-dialog-panel {
+    @apply
+        bg-white
+        container
+        fixed
+        flex 
+        flex-col 
+        h-[80vh]
+        justify-between
+        mx-auto
+        rounded-md
+        shadow-lg
+        top-[12%] 
+        sm:top-[15%]
+        md:h-[75vh]
+}

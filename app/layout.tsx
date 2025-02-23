@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 // import { Geist, Geist_Mono } from "next/font/google";
-import './globals.css';
+import 'styles/globals.css';
 import { Header } from '@app/components';
+import NBAEverything from './nba-everything/NBAEverything';
+import NBAEverythingLayout from './nba-everything/layout/NBAEverythingLayout';
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -27,7 +29,10 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Header />
-        {children}
+        <NBAEverythingLayout>
+          <NBAEverything />
+          {children}
+        </NBAEverythingLayout>
       </body>
     </html>
   );

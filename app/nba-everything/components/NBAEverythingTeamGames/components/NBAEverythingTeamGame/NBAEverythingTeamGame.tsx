@@ -34,6 +34,12 @@ export default function NBAEverythingTeamGame({
     year: 'numeric',
   });
 
+  const isFinal = game?.status === 'Final';
+  const isWinAsHome = isFinal && game?.win && game?.home_team?.id === selectedTeam?.id;
+  const isWinAsVisitor = isFinal && game?.win && game?.visitor_team?.id === selectedTeam?.id;
+  const isLossAsHome = isFinal && !game?.win && game?.home_team?.id === selectedTeam?.id;
+  const isLossAsVisitor = isFinal && !game?.win && game?.visitor_team?.id === selectedTeam?.id;
+
   if (gameData && gameIndex >= gameData?.length) return null;
 
   return (
@@ -41,8 +47,8 @@ export default function NBAEverythingTeamGame({
       <div className='flex flex-col gap-2'>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': game?.win && game.visitor_team?.id === selectedTeam?.id,
-            'text-red-500': !game?.win && game?.visitor_team?.id === selectedTeam?.id,
+            'text-green-500': isWinAsVisitor,
+            'text-red-500': isLossAsVisitor,
           })}
         >
           <div className='flex gap-3'>
@@ -53,8 +59,8 @@ export default function NBAEverythingTeamGame({
         </div>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': game?.win && game?.home_team?.id === selectedTeam?.id,
-            'text-red-500': !game?.win && game?.home_team?.id === selectedTeam?.id,
+            'text-green-500': isWinAsHome,
+            'text-red-500': isLossAsHome,
           })}
         >
           <div className='flex gap-3'>
@@ -67,7 +73,15 @@ export default function NBAEverythingTeamGame({
       <div>
         <div className='flex justify-between'>
           <p className='text-tiny'>{gameDate}</p>
-          {game?.status === 'Final' && <p className='text-tiny'>{game?.status}</p>}
+          {
+            <p
+              className={classNames('text-tiny', {
+                'font-bold': isFinal,
+              })}
+            >
+              {game?.time}
+            </p>
+          }
         </div>
       </div>
       <Link href={gameUrl} className='flex text-center text-tiny underline w-full'>

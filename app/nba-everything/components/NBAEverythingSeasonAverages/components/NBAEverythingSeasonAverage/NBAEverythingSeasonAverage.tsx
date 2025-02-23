@@ -9,7 +9,7 @@ export default function NBASeasonAverage({ statValue, statTitle }: NBASeasonAver
     statTitle && (
       <div className='flex flex-col'>
         <p className='text-2xl'>{statTitle}</p>
-        <p className='text-lg'>{statValue}</p>
+        <p>{statValue}</p>
       </div>
     )
   );

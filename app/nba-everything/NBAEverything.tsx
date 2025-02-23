@@ -2,16 +2,18 @@
 
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { ShimmerDiv } from 'shimmer-effects-react';
 
 import {
-  NBAEverythingSeasonSearch,
-  NBAEverythingTeamSearch,
   NBAEverythingSeasonAverages,
+  NBAEverythingSeasonSearch,
+  NBAEverythingTeamGames,
+  NBAEverythingTeamSearch,
 } from '@nba-everything/components';
 import { useNBAEverythingStore } from '@store';
 import { NBATeamStats, NBATeam } from '@types';
 
-const getSeasonAverages = async ({ season, teamId }: { season?: number; teamId?: number }) => {
+const getTeamSeasonData = async ({ season, teamId }: { season?: number; teamId?: number }) => {
   const seasonAveragesOptions = {
     method: 'GET',
     url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/games/${teamId}/${season}`,
@@ -51,10 +53,10 @@ export default function NBAEverything() {
     queryFn: getCurrentTeams,
   });
 
-  useQuery<NBATeamStats>({
+  const { isPending: isCurrentTeamSeasonAvgsPending } = useQuery<NBATeamStats>({
     enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getSeasonAverages', selectedSeason, selectedTeam?.id],
-    queryFn: () => getSeasonAverages({ season: selectedSeason, teamId: selectedTeam?.id }),
+    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+    queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
   });
 
   return (
@@ -63,12 +65,23 @@ export default function NBAEverything() {
         <NBAEverythingTeamSearch />
         <NBAEverythingSeasonSearch />
       </div>
-      <div className='flex gap-8'>
-        <div className='w-1/2'>
-          <h2>hey</h2>
+      <div className='grid grid-cols-2 gap-8'>
+        <div className='col-span-full md:col-span-1'>
+          <h2>Team info</h2>
         </div>
-        <div className='w-1/2'>
-          <NBAEverythingSeasonAverages />
+        <div className='col-span-full md:col-span-1'>
+          {isCurrentTeamSeasonAvgsPending && (
+            <div className='flex gap-8'>
+              <ShimmerDiv height={400} loading mode='light' width={'18%'} />
+              <ShimmerDiv height={400} loading mode='light' width={'82%'} />
+            </div>
+          )}
+          {!isCurrentTeamSeasonAvgsPending && (
+            <div className='grid grid-cols-12 gap-8'>
+              <NBAEverythingSeasonAverages />
+              <NBAEverythingTeamGames />
+            </div>
+          )}
         </div>
       </div>
     </div>

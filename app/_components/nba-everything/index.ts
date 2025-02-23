@@ -1,4 +1,4 @@
-import NBAEverything from '@app/NBAEverything';
+import NBAEverything from '@components/nba-everything/NBAEverything/NBAEverything';
 import NBAEverythingSeasonAverages from '@components/nba-everything/NBAEverythingSeasonAverages/NBAEverythingSeasonAverages';
 import NBAEverythingSeasonSearch from '@components/nba-everything/NBAEverythingSeasonSearch/NBAEverythingSeasonSearch';
 import NBAEverythingStat from '@components/nba-everything/NBAEverythingStat/NBAEverythingStat';

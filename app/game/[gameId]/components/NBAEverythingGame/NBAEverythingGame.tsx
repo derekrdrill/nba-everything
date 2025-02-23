@@ -8,9 +8,9 @@ import { Button, Dialog, DialogPanel } from '@headlessui/react';
 import { useNBAEverythingStore } from '@store';
 import { getGameStats } from '@app/game/[gameId]/api/get';
 import {
-  NBAEverythingGameFinal,
   NBAEverythingGameShimmer,
   NBAEverythingGameStatLeaders,
+  NBAEverythingGameStatus,
   NBAEverythingGameTeamAndLogo,
   NBAEverythingGameTeamScore,
 } from '@app/game/[gameId]/components';
@@ -58,7 +58,7 @@ export default function NBAEverythingGame() {
             <NBAEverythingGameTeamAndLogo homeOrVisitor='visitor' />
             <div className='flex gap-16 justify-between'>
               <NBAEverythingGameTeamScore homeOrVisitor='visitor' />
-              <NBAEverythingGameFinal />
+              <NBAEverythingGameStatus />
               <NBAEverythingGameTeamScore homeOrVisitor='home' />
             </div>
             <NBAEverythingGameTeamAndLogo homeOrVisitor='home' />

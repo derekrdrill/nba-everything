@@ -4,12 +4,16 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useNBAEverythingStore } from '@store';
 import { SearchBar } from '@components/common';
-import { NBATeam } from '@types';
+import { NBATeam, NBATeamStats } from '@types';
 
 export default function NBAEverythingTeamSearch() {
-  const { selectedTeam, setSelectedTeam } = useNBAEverythingStore();
-  const { data: currentTeamsData } = useQuery<NBATeam[]>({
+  const { selectedSeason, selectedTeam, setSelectedTeam } = useNBAEverythingStore();
+  const { data: currentTeamsData, isPending: isCurrentTeamsPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
+  });
+
+  const { isPending: isCurrentTeamSeasonPending } = useQuery<NBATeamStats>({
+    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
   });
 
   const searchBarTeamOptions = currentTeamsData?.map(team => ({
@@ -26,6 +30,7 @@ export default function NBAEverythingTeamSearch() {
   return (
     <SearchBar
       options={searchBarTeamOptions}
+      isDisabled={isCurrentTeamsPending || isCurrentTeamSeasonPending}
       handleOptionSelect={value => {
         const selectedTeam = currentTeamsData?.find(team => team.id === Number(value));
         if (selectedTeam) {

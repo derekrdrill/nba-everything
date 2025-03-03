@@ -1,7 +1,7 @@
 'use client';
-import { FixedSizeGrid as NBAEverythingTeamGamesGrid } from 'react-window';
 import { useQuery } from '@tanstack/react-query';
 import { useMediaQuery } from 'react-responsive';
+import { FixedSizeGrid as NBAEverythingTeamGamesGrid } from 'react-window';
 
 import { useNBAEverythingStore } from '@store';
 import { NBAEverythingTeamGame } from '@components/nba-everything/NBAEverythingTeamGames/components';

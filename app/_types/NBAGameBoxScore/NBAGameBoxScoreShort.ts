@@ -1,5 +1,3 @@
-import exp from 'constants';
-
 type NBAGameBoxScoreShort = {
   player: string;
   min: number;

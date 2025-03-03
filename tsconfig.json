@@ -24,6 +24,7 @@
       "@api/*": ["app/_api/*"],
       "@client/*": ["app/_client/*"],
       "@components/*": ["app/_components/*"],
+      "@game": ["app/game"],
       "@store": ["app/_store"],
       "@styles/*" : ["app/_styles/*"],
       "@types": ["app/_types"],

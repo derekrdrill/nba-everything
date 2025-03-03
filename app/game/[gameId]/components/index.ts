@@ -1,4 +1,5 @@
 import NBAEverythingGame from '@app/game/[gameId]/components/NBAEverythingGame/NBAEverythingGame';
+import NBAEverythingGameBoxScore from '@app/game/[gameId]/components/NBAEverythingGameBoxScore/NBAEverythingGameBoxScore';
 import NBAEverythingGameShimmer from '@app/game/[gameId]/components/NBAEverythingGameShimmer/NBAEverythingGameShimmer';
 import NBAEverythingGameStatLeaders from '@app/game/[gameId]/components/NBAEverythingGameStatLeaders/NBAEverythingGameStatLeaders';
 import NBAEverythingGameStatus from '@app/game/[gameId]/components/NBAEverythingGameStatus/NBAEverythingGameStatus';
@@ -8,6 +9,7 @@ import NBAEverythingGameTeamStatLeaders from '@app/game/[gameId]/components/NBAE
 
 export default NBAEverythingGame;
 export {
+  NBAEverythingGameBoxScore,
   NBAEverythingGameShimmer,
   NBAEverythingGameStatLeaders,
   NBAEverythingGameStatus,

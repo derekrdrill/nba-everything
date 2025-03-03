@@ -5,12 +5,12 @@
         fixed
         flex 
         flex-col 
-        h-[80vh]
+        h-[86vh]
         justify-between
         mx-auto
         rounded-md
         shadow-lg
-        top-[12%] 
-        sm:top-[15%]
-        md:h-[75vh]
+        top-[8%] 
+        sm:top-[10%]
+        md:h-[80vh]
 }

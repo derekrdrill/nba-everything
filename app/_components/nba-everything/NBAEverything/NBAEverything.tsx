@@ -6,6 +6,7 @@ import { getCurrentTeams, getTeamSeasonData } from '@api/get';
 import {
   NBAEverythingSeasonAverages,
   NBAEverythingSeasonSearch,
+  NBAEverythingTeamDetail,
   NBAEverythingTeamGames,
   NBAEverythingTeamSearch,
 } from '@components/nba-everything';
@@ -34,7 +35,7 @@ export default function NBAEverything() {
       </div>
       <div className='grid grid-cols-2 gap-8'>
         <div className='col-span-full md:col-span-1'>
-          <h2>Team info</h2>
+          <NBAEverythingTeamDetail />
         </div>
         <div className='col-span-full md:col-span-1'>
           {isCurrentTeamSeasonAvgsPending && (

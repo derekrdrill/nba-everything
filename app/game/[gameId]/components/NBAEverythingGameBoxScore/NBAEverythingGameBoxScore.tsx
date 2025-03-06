@@ -34,7 +34,7 @@ export default function NBAEverythingGameBoxScore() {
   return (
     <>
       <h2 className='bg-white text-2xl text-center sticky top-0 z-50 w-full'>Box Score</h2>
-      <div className='flex gap-16 justify-between'>
+      <div className='flex gap-16 justify-between pb-16 sm:pb-0'>
         <NBAEverythingBoxScoreGrid
           containerStyles={classNames('h-[260px] w-full lg:w-1/2 lg:block', {
             hidden: selectedTeamStats === 1,

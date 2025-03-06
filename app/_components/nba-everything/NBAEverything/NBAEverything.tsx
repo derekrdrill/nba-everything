@@ -1,6 +1,8 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { ShimmerDiv } from 'shimmer-effects-react';
+import { useMediaQuery } from 'react-responsive';
+import { useQuery } from '@tanstack/react-query';
 
 import { getCurrentTeams, getTeamSeasonData } from '@api/get';
 import {
@@ -14,6 +16,8 @@ import { useNBAEverythingStore } from '@store';
 import { NBATeamStats, NBATeam } from '@types';
 
 export default function NBAEverything() {
+  const isSM = useMediaQuery({ maxWidth: 640 });
+
   const { selectedTeam, selectedSeason } = useNBAEverythingStore();
 
   useQuery<NBATeam[]>({
@@ -39,9 +43,21 @@ export default function NBAEverything() {
         </div>
         <div className='col-span-full md:col-span-1'>
           {isCurrentTeamSeasonAvgsPending && (
-            <div className='flex gap-8'>
-              <ShimmerDiv className='rounded' height={400} loading mode='light' width={'18%'} />
-              <ShimmerDiv className='rounded' height={400} loading mode='light' width={'82%'} />
+            <div className='flex flex-col gap-8 md:flex-row'>
+              <ShimmerDiv
+                className='h-12 rounded w-full md:h-[400px] md:w-[18%]'
+                height={0}
+                loading
+                mode='light'
+                width={0}
+              />
+              <ShimmerDiv
+                className='h-80 rounded w-full md:h-[400px] md:w-[82%]'
+                height={0}
+                loading
+                mode='light'
+                width={0}
+              />
             </div>
           )}
           {!isCurrentTeamSeasonAvgsPending && (

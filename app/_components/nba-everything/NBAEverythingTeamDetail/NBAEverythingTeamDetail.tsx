@@ -26,10 +26,21 @@ export default function NBAEverythingTeamDetail() {
     <div className='grid grid-cols-5 gap-4'>
       <div className='col-span-2'>
         {isTeamDataPending && (
-          <ShimmerDiv className='rounded' height={160} loading mode='light' width={160} />
+          <ShimmerDiv
+            className='h-32 rounded w-32 sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
+            height={0}
+            loading
+            mode='light'
+            width={0}
+          />
         )}
         {!isTeamDataPending && selectedTeam && (
-          <NBAEverythingTeamLogo height={160} team={selectedTeam} width={160} />
+          <NBAEverythingTeamLogo
+            height={0}
+            imageStyles='h-auto w-72'
+            team={selectedTeam}
+            width={0}
+          />
         )}
       </div>
       <div className='col-span-3'>

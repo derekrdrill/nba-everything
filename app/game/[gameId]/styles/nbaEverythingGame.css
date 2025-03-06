@@ -4,7 +4,7 @@
         fixed
         flex 
         flex-col 
-        h-[86vh]
+        min-h-[86vh]
         justify-between
         mx-96
         rounded-md
@@ -14,6 +14,6 @@
         sm:top-[10%]
         sm:w-full
         md:container
-        md:h-[80vh]
+        md:min-h-[80vh]
         md:mx-auto
 }

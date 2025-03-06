@@ -71,8 +71,8 @@ export default function NBAEverythingGame() {
             <NBAEverythingGameTeamAndLogo homeOrVisitor='home' styles='order-1 md:order-2' />
             <NBAEverythingGameTeamScore homeOrVisitor='home' styles='order-2 md:order-1' />
           </div>
-          {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
         </div>
+        {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
         <div className='px-6'>
           {!isNBAGameStatsPending && (
             <>
@@ -100,7 +100,7 @@ export default function NBAEverythingGame() {
             </>
           )}
         </div>
-        <div className='bottom-0 flex justify-end p-8 sticky'>
+        <div className='bg-white bottom-0 flex justify-end pb-6 pt-4 px-8 sticky z-50'>
           <Button
             className='btn-secondary-md-outline'
             onClick={() => {

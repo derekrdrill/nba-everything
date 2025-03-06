@@ -4,10 +4,12 @@ import { isHomeWin, isVisitorWin } from '@app/game/[gameId]/helpers';
 
 type NBAEverythingGameTeamScoreProps = {
   homeOrVisitor: 'home' | 'visitor';
+  styles?: string;
 };
 
 export default function NBAEverythingGameTeamScore({
   homeOrVisitor,
+  styles,
 }: NBAEverythingGameTeamScoreProps) {
   const { selectedGame } = useNBAEverythingStore();
 
@@ -20,7 +22,7 @@ export default function NBAEverythingGameTeamScore({
 
   return (
     <p
-      className={classNames('text-2xl', {
+      className={classNames('text-2xl', styles, {
         'font-bold': isWin,
       })}
     >

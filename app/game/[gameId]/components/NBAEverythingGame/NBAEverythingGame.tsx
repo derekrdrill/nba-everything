@@ -61,15 +61,15 @@ export default function NBAEverythingGame() {
       open={!isNBATeamSeasonDataPending && !!selectedGame}
     >
       <DialogPanel className='game-dialog-panel'>
-        <div className='flex flex-col gap-4 pt-16 px-14 md:px-24'>
-          <div className='flex justify-between'>
+        <div className='flex flex-col gap-4 mb-12 pt-16 px-14 md:flex-row md:justify-around md:px-24'>
+          <div className='flex gap-4 justify-between order-2 md:order-1'>
             <NBAEverythingGameTeamAndLogo homeOrVisitor='visitor' />
-            <div className='flex gap-16 justify-between'>
-              <NBAEverythingGameTeamScore homeOrVisitor='visitor' />
-              <NBAEverythingGameStatus />
-              <NBAEverythingGameTeamScore homeOrVisitor='home' />
-            </div>
-            <NBAEverythingGameTeamAndLogo homeOrVisitor='home' />
+            <NBAEverythingGameTeamScore homeOrVisitor='visitor' />
+          </div>
+          <NBAEverythingGameStatus styles='order-1 md:order-2' />
+          <div className='flex gap-4 justify-between order-2 md:order-3'>
+            <NBAEverythingGameTeamAndLogo homeOrVisitor='home' styles='order-1 md:order-2' />
+            <NBAEverythingGameTeamScore homeOrVisitor='home' styles='order-2 md:order-1' />
           </div>
           {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
         </div>

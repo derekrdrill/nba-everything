@@ -1,6 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
@@ -26,9 +27,24 @@ export default function SearchBar({
   value,
 }: SearchBarProps) {
   const hasOptionsLoaded = !!options?.length;
+  const searchBarContainerRef = useRef<HTMLDivElement>(null);
+  const [searchBarWidth, setSearchBarWidth] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSearchBarWidth(searchBarContainerRef?.current?.clientWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    setSearchBarWidth(searchBarContainerRef?.current?.clientWidth);
+  }, [searchBarContainerRef?.current?.clientWidth]);
 
   return (
-    <div className='w-full'>
+    <div className='w-full' ref={searchBarContainerRef}>
       <Listbox disabled={isDisabled} onChange={handleOptionSelect} value={value}>
         <ListboxButton
           className={classNames(
@@ -56,10 +72,13 @@ export default function SearchBar({
             )}
           </div>
         </ListboxButton>
-        <ListboxOptions className='absolute bg-white border-2 border-gray-100 max-h-96 overflow-auto rounded-b-md z-10'>
+        <ListboxOptions
+          className='absolute bg-white border-2 border-gray-100 max-h-96 overflow-auto rounded-b-md z-10'
+          style={{ width: searchBarWidth }}
+        >
           {options?.map(option => (
             <ListboxOption
-              className='border-b-2 border-gray-100 cursor-pointer p-2 w-full hover:bg-blue-200'
+              className='border-b-2 border-gray-100 cursor-pointer p-2 hover:bg-blue-200'
               key={option.value}
               value={option.value}
             >

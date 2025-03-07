@@ -18,7 +18,7 @@ export default function NBAEverythingGameStatLeaders() {
   const visitorStatLeaders = nbaGameStats?.visitorTeam.statLeaders;
 
   return (
-    <div className='flex flex-col gap-4 mx-16'>
+    <div className='flex flex-col gap-4 mx-auto md:mx-16'>
       <h2 className='text-2xl text-center'>Stat Leaders</h2>
       <div className='flex justify-center lg:justify-between'>
         <NBAEverythingGameTeamStatLeaders

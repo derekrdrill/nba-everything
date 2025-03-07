@@ -14,10 +14,10 @@ export default function NBAEverythingGameTeamAndLogo({
   const { selectedGame } = useNBAEverythingStore();
 
   return (
-    <div className={classNames('flex gap-2 md:flex-col', styles)}>
+    <div className={classNames('flex gap-2 items-center md:flex-col', styles)}>
       <NBAEverythingTeamLogo
         height={0}
-        imageStyles='h-8 w-8 md:h-16 md:w-16'
+        imageStyles='h-12 w-12 md:h-24 md:w-24'
         team={selectedGame?.[`${homeOrVisitor}_team`]}
         width={0}
       />

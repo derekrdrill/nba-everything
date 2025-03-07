@@ -24,10 +24,10 @@ export default function NBAEverythingTeamDetail() {
 
   return (
     <div className='grid grid-cols-5 gap-4'>
-      <div className='col-span-2'>
+      <div className='col-span-full flex justify-center md:col-span-2'>
         {isTeamDataPending && (
           <ShimmerDiv
-            className='h-32 rounded w-32 sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
+            className='h-80 rounded w-full sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
             height={0}
             loading
             mode='light'
@@ -43,7 +43,7 @@ export default function NBAEverythingTeamDetail() {
           />
         )}
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-full md:col-span-3'>
         {isTeamDataPending && (
           <div className='flex flex-col gap-2'>
             <ShimmerDiv className='rounded' height={45} loading mode='light' width={'90%'} />
@@ -63,7 +63,7 @@ export default function NBAEverythingTeamDetail() {
             </p>
             <p className='text-sm'>
               <span className='font-bold'>Capacity</span>:{' '}
-              {selectedTeam.stadium.capacity.toLocaleString()}
+              {selectedTeam.stadium?.capacity?.toLocaleString()}
             </p>
             <Link
               className='text-blue-500 text-sm underline hover:text-blue-700'

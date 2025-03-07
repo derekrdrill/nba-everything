@@ -1,7 +1,5 @@
 'use client';
-import classNames from 'classnames';
 import { ShimmerDiv } from 'shimmer-effects-react';
-import { useMediaQuery } from 'react-responsive';
 import { useQuery } from '@tanstack/react-query';
 
 import { getCurrentTeams, getTeamSeasonData } from '@api/get';
@@ -16,8 +14,6 @@ import { useNBAEverythingStore } from '@store';
 import { NBATeamStats, NBATeam } from '@types';
 
 export default function NBAEverything() {
-  const isSM = useMediaQuery({ maxWidth: 640 });
-
   const { selectedTeam, selectedSeason } = useNBAEverythingStore();
 
   useQuery<NBATeam[]>({
@@ -37,7 +33,7 @@ export default function NBAEverything() {
         <NBAEverythingTeamSearch />
         <NBAEverythingSeasonSearch />
       </div>
-      <div className='grid grid-cols-2 gap-8'>
+      <div className='grid grid-cols-2 gap-8 mt-6'>
         <div className='col-span-full md:col-span-1'>
           <NBAEverythingTeamDetail />
         </div>

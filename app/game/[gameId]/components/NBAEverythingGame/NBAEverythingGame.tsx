@@ -61,7 +61,7 @@ export default function NBAEverythingGame() {
       open={!isNBATeamSeasonDataPending && !!selectedGame}
     >
       <DialogPanel className='game-dialog-panel'>
-        <div className='flex flex-col gap-4 mb-12 pt-16 px-14 md:flex-row md:justify-around md:px-24'>
+        <div className='flex flex-col gap-4 mb-12 pt-8 px-14 md:flex-row md:justify-around md:pt-16 md:px-24'>
           <div className='flex gap-4 justify-between order-2 md:order-1'>
             <NBAEverythingGameTeamAndLogo homeOrVisitor='visitor' />
             <NBAEverythingGameTeamScore homeOrVisitor='visitor' />

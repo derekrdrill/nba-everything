@@ -1,8 +1,9 @@
 'use client';
-import { ShimmerDiv } from 'shimmer-effects-react';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { ShimmerDiv } from 'shimmer-effects-react';
 
-import { getCurrentTeams, getTeamSeasonData } from '@api/get';
+import { useNBAEverythingStore } from '@store';
 import {
   NBAEverythingSeasonAverages,
   NBAEverythingSeasonSearch,
@@ -10,11 +11,12 @@ import {
   NBAEverythingTeamGames,
   NBAEverythingTeamSearch,
 } from '@components/nba-everything';
-import { useNBAEverythingStore } from '@store';
+import { getCurrentTeams, getTeamSeasonData } from '@api/get';
+import { getTeamModeMainColor } from '@helpers';
 import { NBATeamStats, NBATeam } from '@types';
 
 export default function NBAEverything() {
-  const { selectedTeam, selectedSeason } = useNBAEverythingStore();
+  const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingStore();
 
   useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
@@ -26,6 +28,28 @@ export default function NBAEverything() {
     queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
     queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
   });
+
+  useEffect(() => {
+    if (selectedMode === 'light') {
+      document.body.setAttribute('style', '');
+      document.body.setAttribute('style', 'background-color: white;');
+      document.querySelector('.header-text')?.setAttribute('style', 'color: black;');
+    } else if (selectedMode === 'dark') {
+      document.body.setAttribute('style', '');
+      document.body.setAttribute('style', 'background-color: black;');
+      document.querySelector('.header-text')?.setAttribute('style', 'color: white;');
+    } else if (selectedMode === 'team' && selectedTeam) {
+      document.body.setAttribute('style', '');
+      document.body.setAttribute(
+        'style',
+        `background-color: #${getTeamModeMainColor({
+          primaryColor: selectedTeam.colors.primary,
+          secondaryColor: selectedTeam.colors.secondary,
+        })};`,
+      );
+      document.querySelector('.header-text')?.setAttribute('style', 'color: white;');
+    }
+  }, [selectedMode, selectedTeam]);
 
   return (
     <div className='flex flex-col gap-4 mx-4 md:mx-8 lg:mx-16 xl:mx-32'>

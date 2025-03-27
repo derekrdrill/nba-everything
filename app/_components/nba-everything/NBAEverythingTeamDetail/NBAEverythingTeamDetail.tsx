@@ -1,14 +1,17 @@
 'use client';
+import classNames from 'classnames';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
+import { ArrowTopRightOnSquareIcon } from '@node_modules/@heroicons/react/24/outline';
 
 import { useNBAEverythingStore } from '@store';
 import { NBAEverythingTeamLogo } from '@components/nba-everything';
+import { getTeamModeSecondaryColor } from '@helpers';
 import { NBATeam } from '@types';
 
 export default function NBAEverythingTeamDetail() {
-  const { selectedTeam } = useNBAEverythingStore();
+  const { selectedMode, selectedTeam } = useNBAEverythingStore();
 
   const { isPending: isTeamDataPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
@@ -37,7 +40,9 @@ export default function NBAEverythingTeamDetail() {
         {!isTeamDataPending && selectedTeam && (
           <NBAEverythingTeamLogo
             height={0}
-            imageStyles='h-auto w-72'
+            imageStyles={classNames('h-auto w-72', {
+              'bg-gray-700 py-4 px-6 rounded': selectedMode === 'dark',
+            })}
             team={selectedTeam}
             width={0}
           />
@@ -54,7 +59,21 @@ export default function NBAEverythingTeamDetail() {
           </div>
         )}
         {!isTeamDataPending && selectedTeam && (
-          <>
+          <div
+            className={classNames({
+              'text-white': selectedMode === 'dark',
+              'text-black': selectedMode === 'light',
+            })}
+            style={{
+              color:
+                selectedMode === 'team'
+                  ? `#${getTeamModeSecondaryColor({
+                      primaryColor: selectedTeam.colors.primary,
+                      secondaryColor: selectedTeam.colors.secondary,
+                    })}`
+                  : '',
+            }}
+          >
             <h1 className='text-4xl'>{selectedTeam.full_name}</h1>
             <h2 className='text-xl'>{selectedTeam.stadium.name}</h2>
             <p className='text-sm'>
@@ -66,16 +85,18 @@ export default function NBAEverythingTeamDetail() {
               {selectedTeam.stadium?.capacity?.toLocaleString()}
             </p>
             <Link
-              className='text-blue-500 text-sm underline hover:text-blue-700'
+              className={classNames('text-sm underline', {
+                'text-blue-500 hover:text-blue-700': selectedMode !== 'team',
+              })}
               href={`https://www.stubhub.com/${getStubHubTeamName({
                 fullName: selectedTeam.full_name,
               })}-tickets`}
               target='_blank'
               rel='noreferrer'
             >
-              See tickets on Stubhub
+              See tickets on Stubhub <ArrowTopRightOnSquareIcon className='h-4 w-4 inline' />
             </Link>
-          </>
+          </div>
         )}
       </div>
     </div>

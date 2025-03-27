@@ -1,14 +1,16 @@
 'use client';
+import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
 import { useMediaQuery } from 'react-responsive';
 import { FixedSizeGrid as NBAEverythingTeamGamesGrid } from 'react-window';
 
 import { useNBAEverythingStore } from '@store';
 import { NBAEverythingTeamGame } from '@components/nba-everything/NBAEverythingTeamGames/components';
+import { getTeamModeSecondaryColor } from '@helpers';
 import { NBATeamStats } from '@types';
 
 export default function NBAEverythingTeamGames() {
-  const { selectedSeason, selectedTeam } = useNBAEverythingStore();
+  const { selectedMode, selectedSeason, selectedTeam } = useNBAEverythingStore();
   const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
     enabled: !!(selectedTeam?.id && selectedSeason),
     queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
@@ -26,7 +28,22 @@ export default function NBAEverythingTeamGames() {
 
   return (
     <div className='col-span-full md:col-span-9 lg:col-span-10'>
-      <h2 className='text-2xl'>Game Scores</h2>
+      <h2
+        className={classNames('text-2xl', {
+          'text-white': selectedMode === 'dark',
+        })}
+        style={{
+          color:
+            selectedMode === 'team'
+              ? `#${getTeamModeSecondaryColor({
+                  primaryColor: selectedTeam?.colors.primary,
+                  secondaryColor: selectedTeam?.colors.secondary,
+                })}`
+              : '',
+        }}
+      >
+        Game Scores
+      </h2>
       <NBAEverythingTeamGamesGrid
         columnCount={columnCount}
         columnWidth={isXS ? 350 : isSM ? 480 : isMD ? 330 : isLG ? 160 : 145}

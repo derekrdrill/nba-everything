@@ -17,7 +17,6 @@ interface SearchBarProps {
   }[];
   rounded?: 'sm' | 'md' | 'lg';
   size?: 'sm' | 'md' | 'lg';
-  variant?: 'standard' | 'static' | 'outlined';
   value?: string;
 }
 

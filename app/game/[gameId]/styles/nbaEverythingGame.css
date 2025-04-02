@@ -1,6 +1,5 @@
 .game-dialog-panel {
     @apply
-        bg-white
         fixed
         flex 
         flex-col 

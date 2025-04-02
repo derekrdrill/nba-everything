@@ -3,20 +3,22 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
 
-import { useNBAEverythingStore } from '@store';
+import { useNBAEverythingStore } from '@/store';
 import {
   NBAEverythingSeasonAverages,
   NBAEverythingSeasonSearch,
   NBAEverythingTeamDetail,
   NBAEverythingTeamGames,
   NBAEverythingTeamSearch,
-} from '@components/nba-everything';
-import { getCurrentTeams, getTeamSeasonData } from '@api/get';
-import { getTeamModeMainColor } from '@helpers';
-import { NBATeamStats, NBATeam } from '@types';
+} from '@/components/nba-everything';
+import { getCurrentTeams, getTeamSeasonData } from '@/api/get';
+import { getTeamModeMainColor } from '@/helpers';
+import { NBATeamStats, NBATeam } from '@/types';
 
 export default function NBAEverything() {
   const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingStore();
+
+  console.log(selectedTeam);
 
   useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@store';
-import { NBAEverythingBoxScoreGrid } from '@components/nba-everything';
-import { NBABoxScoreShort, NBAGameStats, NBAGameBoxScoreShort } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { NBAEverythingBoxScoreGrid } from '@/components/nba-everything';
+import { NBABoxScoreShort, NBAGameStats, NBAGameBoxScoreShort } from '@/types';
 
 const getStatRows = ({
   boxScoreData,

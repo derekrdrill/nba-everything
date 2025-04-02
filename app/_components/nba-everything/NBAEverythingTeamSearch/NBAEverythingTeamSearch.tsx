@@ -2,9 +2,9 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@store';
-import { SearchBar } from '@components/common';
-import { NBATeam, NBATeamStats } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { SearchBar } from '@/components/common';
+import { NBATeam, NBATeamStats } from '@/types';
 
 export default function NBAEverythingTeamSearch() {
   const { selectedSeason, selectedTeam, setSelectedTeam } = useNBAEverythingStore();

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { NBAGameStat } from '@types';
+import { NBAGameStat } from '@/types';
 
 type GameModalTeamStatLeadersProps = {
   containerStyles?: string;

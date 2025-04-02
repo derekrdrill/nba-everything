@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { useNBAEverythingStore } from '@store';
-import { isHomeWin, isVisitorWin } from '@app/game/[gameId]/helpers';
+import { useNBAEverythingStore } from '@/store';
+import { isHomeWin, isVisitorWin } from '@/app/game/[gameId]/helpers';
 
 type NBAEverythingGameTeamScoreProps = {
   homeOrVisitor: 'home' | 'visitor';

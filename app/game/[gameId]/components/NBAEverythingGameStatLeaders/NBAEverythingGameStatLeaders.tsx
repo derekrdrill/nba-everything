@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
-import { useNBAEverythingStore } from '@store';
-import { NBAEverythingGameTeamStatLeaders } from '@app/game/[gameId]/components';
-import { NBAGameStats } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { NBAEverythingGameTeamStatLeaders } from '@/app/game/[gameId]/components';
+import { NBAGameStats } from '@/types';
 
 export default function NBAEverythingGameStatLeaders() {
   const { selectedGame, selectedTeamStats } = useNBAEverythingStore();

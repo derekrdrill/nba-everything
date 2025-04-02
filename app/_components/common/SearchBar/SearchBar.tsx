@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
-import { useNBAEverythingStore } from '@store';
-import { getTeamModeSecondaryColor, getTeamModeSearchBarTextColor } from '@helpers';
+import { useNBAEverythingStore } from '@/store';
+import { getTeamModeSecondaryColor, getTeamModeSearchBarTextColor } from '@/helpers';
 
 interface SearchBarProps {
   handleOptionSelect?: (value: string) => void;

@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
-import { ArrowTopRightOnSquareIcon } from '@node_modules/@heroicons/react/24/outline';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
-import { useNBAEverythingStore } from '@store';
-import { NBAEverythingTeamLogo } from '@components/nba-everything';
-import { getTeamModeSecondaryColor } from '@helpers';
-import { NBATeam } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { NBAEverythingTeamLogo } from '@/components/nba-everything';
+import { getTeamModeSecondaryColor } from '@/helpers';
+import { NBATeam } from '@/types';
 
 export default function NBAEverythingTeamDetail() {
   const { selectedMode, selectedTeam } = useNBAEverythingStore();

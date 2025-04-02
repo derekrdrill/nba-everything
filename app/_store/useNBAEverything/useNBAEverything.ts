@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { NBAGame, NBATeam } from '@types';
+import { NBAGame, NBATeam } from '@/types';
 
 type NBAEverythingState = {
   selectedGame?: NBAGame;

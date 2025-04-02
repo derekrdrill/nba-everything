@@ -1,4 +1,4 @@
-import { NBAGameBoxScore, NBAGameBoxScoreShort, NBAGameStat } from '@types';
+import { NBAGameBoxScore, NBAGameBoxScoreShort, NBAGameStat } from '@/types';
 
 type NBAGameStats = {
   abbrName: string;

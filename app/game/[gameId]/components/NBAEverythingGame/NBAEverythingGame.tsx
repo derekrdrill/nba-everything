@@ -5,8 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Dialog, DialogPanel, Tab, TabGroup, TabList } from '@headlessui/react';
 
-import { useNBAEverythingStore } from '@store';
-import { getGameStats } from '@app/game/[gameId]/api/get';
+import { useNBAEverythingStore } from '@/store';
+import { getGameStats } from '@/app/game/[gameId]/api/get';
 import {
   NBAEverythingGameBoxScore,
   NBAEverythingGameShimmer,
@@ -14,9 +14,9 @@ import {
   NBAEverythingGameStatus,
   NBAEverythingGameTeamAndLogo,
   NBAEverythingGameTeamScore,
-} from '@app/game/[gameId]/components';
-import { NBATeamStats, NBAGameStats } from '@types';
-import '@app/game/[gameId]/styles/nbaEverythingGame.css';
+} from '@/app/game/[gameId]/components';
+import { NBATeamStats, NBAGameStats } from '@/types';
+import '@/app/game/[gameId]/styles/nbaEverythingGame.css';
 
 export default function NBAEverythingGame() {
   const pathName = usePathname();

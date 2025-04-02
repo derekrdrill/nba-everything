@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import nbaLogo from '@public/nba.png';
+import nbaLogo from '@/public/nba.png';
 
-import { DarkLightTeamMode } from '@components/common';
+import { DarkLightTeamMode } from '@/components/common';
 
 export default function Header() {
   return (

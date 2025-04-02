@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ArrowLeftIcon, ArrowRightIcon } from '@node_modules/@heroicons/react/20/solid';
 
-import { useNBAEverythingStore } from '@store';
-import { isHomeWin, isVisitorWin } from '@app/game/[gameId]/helpers';
+import { useNBAEverythingStore } from '@/store';
+import { isHomeWin, isVisitorWin } from '@/app/game/[gameId]/helpers';
 
 type NBAEverythingGameStatusProps = {
   styles?: string;

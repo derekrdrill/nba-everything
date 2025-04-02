@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { useNBAEverythingStore } from '@store';
-import { SearchBar } from '@components/common';
-import { NBA_SEASONS } from '@components/nba-everything/NBAEverythingSeasonSearch/constants';
-import { NBATeam, NBATeamStats } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { SearchBar } from '@/components/common';
+import { NBA_SEASONS } from '@/components/nba-everything/NBAEverythingSeasonSearch/constants';
+import { NBATeam, NBATeamStats } from '@/types';
 
 export default function NBAEverythingSeasonSearch() {
   const { selectedSeason, selectedTeam, setSelectedSeason } = useNBAEverythingStore();

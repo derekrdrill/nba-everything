@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NBATeam } from '@types';
+import { NBATeam } from '@/types';
 
 const getTeamSeasonData = async ({ season, teamId }: { season?: number; teamId?: number }) => {
   const seasonAveragesOptions = {

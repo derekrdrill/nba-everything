@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames';
-import { useNBAEverythingStore } from '@store';
-import { getTeamModeSecondaryColor } from '@helpers';
+import { useNBAEverythingStore } from '@/store';
+import { getTeamModeSecondaryColor } from '@/helpers';
 
 type NBASeasonAverageProps = {
   statValue?: string;

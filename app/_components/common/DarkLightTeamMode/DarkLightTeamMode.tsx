@@ -2,8 +2,8 @@
 import { Tab, TabGroup, TabList } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
-import { useNBAEverythingStore } from '@app/_store';
-import { TeamIcon } from '@components/common/DarkLightTeamMode/_components';
+import { useNBAEverythingStore } from '@/app/_store';
+import { TeamIcon } from '@/components/common/DarkLightTeamMode/_components';
 
 export default function DarkLightTeamMode() {
   const { selectedMode, setSelectedMode } = useNBAEverythingStore();

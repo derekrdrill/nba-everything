@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
-import '@/app/_styles/globals.css';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../**/*.stories.@(js|jsx|mjs|ts|tsx)', '../**/*.mdx'],
@@ -14,5 +14,9 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['../public'],
+  core: {
+    builder: '@storybook/builder-vite',
+  },
 };
+
 export default config;

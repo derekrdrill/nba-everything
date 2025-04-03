@@ -1,8 +1,8 @@
 'use client';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 import { useNBAEverythingStore } from '@/store';

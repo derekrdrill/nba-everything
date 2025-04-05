@@ -5,13 +5,13 @@ import { ShimmerDiv } from 'shimmer-effects-react';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
 import { getTeamModeSecondaryColor } from '@/helpers';
 import { NBATeam } from '@/types';
 
 export default function NBAEverythingTeamDetail() {
-  const { selectedMode, selectedTeam } = useNBAEverythingStore();
+  const { selectedMode, selectedTeam } = useNBAEverythingState();
 
   const { isPending: isTeamDataPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],

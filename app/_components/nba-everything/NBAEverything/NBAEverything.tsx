@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import {
   NBAEverythingSeasonAverages,
   NBAEverythingSeasonSearch,
@@ -16,7 +16,7 @@ import { getTeamModeMainColor } from '@/helpers';
 import { NBATeamStats, NBATeam } from '@/types';
 
 export default function NBAEverything() {
-  const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingStore();
+  const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingState();
 
   console.log(selectedTeam);
 

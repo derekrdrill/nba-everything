@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { isHomeWin, isVisitorWin } from '@/app/game/[gameId]/helpers';
 
 type NBAEverythingGameTeamScoreProps = {
@@ -11,7 +11,7 @@ export default function NBAEverythingGameTeamScore({
   homeOrVisitor,
   styles,
 }: NBAEverythingGameTeamScoreProps) {
-  const { selectedGame } = useNBAEverythingStore();
+  const { selectedGame } = useNBAEverythingState();
 
   const homeTeamScore = selectedGame?.home_team_score;
   const visitorTeamScore = selectedGame?.visitor_team_score;

@@ -3,7 +3,6 @@ import { composeStories } from '@storybook/testing-react';
 import { render, screen } from '@testing-library/react';
 
 import * as stories from '@/components/nba-everything/NBAEverythingSeasonAverages/NBAEverythingSeasonAverages.stories';
-import { mockTeamStats, mockTeam } from './mocks';
 
 const { LightMode, DarkMode, TeamMode } = composeStories(stories);
 

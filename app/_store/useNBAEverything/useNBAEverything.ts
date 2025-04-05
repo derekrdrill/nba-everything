@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { NBAGame, NBATeam } from '@/types';
+import { NBAGame, NBATeam, NBASelectedMode } from '@/types';
 
 type NBAEverythingState = {
   selectedGame?: NBAGame;
-  selectedMode: 'dark' | 'light' | 'team';
+  selectedMode: NBASelectedMode;
   selectedSeason: number;
   selectedTeam?: NBATeam;
   selectedTeamStats: number;
   setSelectedGame: (game?: NBAGame) => void;
-  setSelectedMode: (mode: 'dark' | 'light' | 'team') => void;
+  setSelectedMode: (mode: NBASelectedMode) => void;
   setSelectedSeason: (season: number) => void;
   setSelectedTeam: (team: NBATeam) => void;
   setSelectedTeamStats: (team?: number) => void;

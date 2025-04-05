@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import SearchBar from './SearchBar';
-import { useNBAEverythingStore } from '@/store';
 import { Fragment } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { mockUseNBAEverythingState } from '@/mocks';
+import SearchBar from './SearchBar';
 
 const meta: Meta<typeof SearchBar> = {
   title: 'Components/Common/SearchBar',
@@ -11,13 +11,8 @@ const meta: Meta<typeof SearchBar> = {
   },
   decorators: [
     (Story, context) => {
-      // Get the selectedMode from the story parameters
-      const selectedMode = context.parameters.selectedMode || 'light';
-
-      // Set up the store with the desired state
-      useNBAEverythingStore.setState({
-        selectedMode,
-        selectedTeam: context.parameters.selectedTeam || null,
+      mockUseNBAEverythingState({
+        useNBAEverythingState: context.parameters.mockData?.useNBAEverythingState,
       });
 
       return (
@@ -49,7 +44,11 @@ export const Default: Story = {
     value: '1',
   },
   parameters: {
-    selectedMode: 'light',
+    mockData: {
+      useNBAEverythingState: {
+        selectedMode: 'light',
+      },
+    },
   },
 };
 
@@ -59,7 +58,11 @@ export const DarkMode: Story = {
     value: '1',
   },
   parameters: {
-    selectedMode: 'dark',
+    mockData: {
+      useNBAEverythingState: {
+        selectedMode: 'dark',
+      },
+    },
   },
 };
 
@@ -69,13 +72,17 @@ export const TeamMode: Story = {
     value: '1',
   },
   parameters: {
-    selectedMode: 'team',
-    selectedTeam: {
-      colors: {
-        primary: 'C8102E',
-        secondary: 'FDB927',
-        tertiary: '000000',
-        quaternary: '9EA2A2',
+    mockData: {
+      useNBAEverythingState: {
+        selectedMode: 'team',
+        selectedTeam: {
+          colors: {
+            primary: 'C8102E',
+            secondary: 'FDB927',
+            tertiary: '000000',
+            quaternary: '9EA2A2',
+          },
+        },
       },
     },
   },
@@ -88,6 +95,10 @@ export const Disabled: Story = {
     isDisabled: true,
   },
   parameters: {
-    selectedMode: 'light',
+    mockData: {
+      useNBAEverythingState: {
+        selectedMode: 'light',
+      },
+    },
   },
 };

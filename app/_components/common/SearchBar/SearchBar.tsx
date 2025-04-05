@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { getTeamModeSecondaryColor, getTeamModeSearchBarTextColor } from '@/helpers';
 
 interface SearchBarProps {
@@ -31,7 +31,7 @@ export default function SearchBar({
   const hasOptionsLoaded = !!options?.length;
   const searchBarContainerRef = useRef<HTMLDivElement>(null);
   const [searchBarWidth, setSearchBarWidth] = useState<number | undefined>(undefined);
-  const { selectedMode, selectedTeam } = useNBAEverythingStore();
+  const { selectedMode, selectedTeam } = useNBAEverythingState();
 
   useEffect(() => {
     const handleResize = () => {

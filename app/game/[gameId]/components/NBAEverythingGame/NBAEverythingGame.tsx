@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Dialog, DialogPanel, Tab, TabGroup, TabList } from '@headlessui/react';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { getGameStats } from '@/app/game/[gameId]/api/get';
 import {
   NBAEverythingGameBoxScore,
@@ -30,7 +30,7 @@ export default function NBAEverythingGame() {
     setSelectedTeamStats,
     setSelectedGame,
     selectedMode,
-  } = useNBAEverythingStore();
+  } = useNBAEverythingState();
 
   const { data: nbaTeamSeasonData, isPending: isNBATeamSeasonDataPending } = useQuery<NBATeamStats>(
     {

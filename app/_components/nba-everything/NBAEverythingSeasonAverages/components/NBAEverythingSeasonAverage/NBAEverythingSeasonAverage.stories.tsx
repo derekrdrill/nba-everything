@@ -1,65 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import NBASeasonAverage from './NBAEverythingSeasonAverage';
-import { useNBAEverythingStore } from '@/store';
-import classNames from 'classnames';
+import { mockTeamCLT } from '@/mocks';
 import '@/app/_styles/globals.css';
 
-const mockTeam = {
-  id: 1,
-  full_name: 'Charlotte Hornets',
-  colors: {
-    primary: '00788C',
-    secondary: '1D1160',
-    tertiary: 'A1A1A4',
-    quaternary: 'FFFFFF',
-  },
-};
-
 const meta: Meta<typeof NBASeasonAverage> = {
-  title: 'Components/NBAEverything/NBAEverythingSeasonAverages/NBAEverythingSeasonAverage',
+  title: 'Components/NBAEverything/SeasonAverage',
   component: NBASeasonAverage,
-  parameters: {
-    layout: 'centered',
-  },
-  decorators: [
-    (Story, context) => {
-      // Get the selectedMode from the story parameters
-      const selectedMode = context.parameters.selectedMode || 'light';
-
-      // Set up the store with the desired state
-      useNBAEverythingStore.setState({
-        selectedMode,
-        selectedTeam: context.parameters.selectedTeam || mockTeam,
-      });
-
-      // Determine background color based on mode
-      const bgColor =
-        selectedMode === 'dark'
-          ? 'bg-gray-900'
-          : selectedMode === 'team'
-            ? 'bg-[#1D1160]'
-            : 'bg-white';
-
-      return (
-        <div className={classNames(`w-full max-w-4xl p-4 min-h-screen ${bgColor}`)}>
-          <Story />
-        </div>
-      );
-    },
-  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof NBASeasonAverage>;
 
-export const Default: Story = {
+export const LightMode: Story = {
   args: {
     statTitle: 'PPG',
     statValue: '25.5',
   },
   parameters: {
-    selectedMode: 'light',
-    selectedTeam: mockTeam,
+    useNBAEverythingState: {
+      selectedMode: 'light',
+      selectedTeam: mockTeamCLT,
+    },
   },
 };
 
@@ -69,8 +31,10 @@ export const DarkMode: Story = {
     statValue: '25.5',
   },
   parameters: {
-    selectedMode: 'dark',
-    selectedTeam: mockTeam,
+    useNBAEverythingState: {
+      selectedMode: 'dark',
+      selectedTeam: mockTeamCLT,
+    },
   },
 };
 
@@ -80,8 +44,10 @@ export const TeamMode: Story = {
     statValue: '25.5',
   },
   parameters: {
-    selectedMode: 'team',
-    selectedTeam: mockTeam,
+    useNBAEverythingState: {
+      selectedMode: 'team',
+      selectedTeam: mockTeamCLT,
+    },
   },
 };
 
@@ -91,7 +57,9 @@ export const WinLoss: Story = {
     statValue: '55-27',
   },
   parameters: {
-    selectedMode: 'light',
-    selectedTeam: mockTeam,
+    useNBAEverythingState: {
+      selectedMode: 'light',
+      selectedTeam: mockTeamCLT,
+    },
   },
 };

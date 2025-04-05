@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
 
 type NBAEverythingGameTeamAndLogoProps = {
@@ -11,7 +11,7 @@ export default function NBAEverythingGameTeamAndLogo({
   homeOrVisitor,
   styles,
 }: NBAEverythingGameTeamAndLogoProps) {
-  const { selectedGame } = useNBAEverythingStore();
+  const { selectedGame } = useNBAEverythingState();
 
   return (
     <div className={classNames('flex gap-2 items-center md:flex-col', styles)}>

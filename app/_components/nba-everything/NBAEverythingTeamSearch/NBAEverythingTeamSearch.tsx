@@ -2,12 +2,12 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { SearchBar } from '@/components/common';
 import { NBATeam, NBATeamStats } from '@/types';
 
 export default function NBAEverythingTeamSearch() {
-  const { selectedSeason, selectedTeam, setSelectedTeam } = useNBAEverythingStore();
+  const { selectedSeason, selectedTeam, setSelectedTeam } = useNBAEverythingState();
   const { data: currentTeamsData, isPending: isCurrentTeamsPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
   });

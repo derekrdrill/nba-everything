@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { NBAEverythingBoxScoreGrid } from '@/components/nba-everything';
 import { NBABoxScoreShort, NBAGameStats, NBAGameBoxScoreShort } from '@/types';
 
@@ -21,7 +21,7 @@ const getStatRows = ({
 };
 
 export default function NBAEverythingGameBoxScore() {
-  const { selectedGame, selectedTeamStats } = useNBAEverythingStore();
+  const { selectedGame, selectedTeamStats } = useNBAEverythingState();
 
   const { data: nbaGameStats } = useQuery<{
     homeTeam: NBAGameStats;

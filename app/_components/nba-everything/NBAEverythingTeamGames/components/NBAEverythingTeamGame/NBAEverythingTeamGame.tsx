@@ -2,7 +2,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@/store';
+import { useNBAEverythingState } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
 import { NBATeamStats } from '@/types';
 
@@ -17,7 +17,7 @@ export default function NBAEverythingTeamGame({
   rowIndex,
   style,
 }: NBAEverythingTeamGameProps) {
-  const { selectedSeason, selectedTeam } = useNBAEverythingStore();
+  const { selectedSeason, selectedTeam } = useNBAEverythingState();
   const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
     enabled: !!(selectedTeam?.id && selectedSeason),
     queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],

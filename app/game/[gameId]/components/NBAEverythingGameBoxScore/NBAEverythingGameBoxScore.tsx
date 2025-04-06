@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { NBAEverythingBoxScoreGrid } from '@/components/nba-everything';
-import { NBABoxScoreShort, NBAGameStats, NBAGameBoxScoreShort } from '@/types';
+import { NBABoxScoreShort, NBAGameBoxScoreShort } from '@/types';
+import { useNBAEverythingClient } from '@/app/_hooks';
 
 const getStatRows = ({
   boxScoreData,
@@ -21,14 +21,9 @@ const getStatRows = ({
 };
 
 export default function NBAEverythingGameBoxScore() {
-  const { selectedGame, selectedTeamStats } = useNBAEverythingState();
-
-  const { data: nbaGameStats } = useQuery<{
-    homeTeam: NBAGameStats;
-    visitorTeam: NBAGameStats;
-  }>({
-    enabled: !!selectedGame?.id,
-    queryKey: ['getGameStats', selectedGame?.id],
+  const { selectedTeamStats } = useNBAEverythingAtoms();
+  const { currentGameStats } = useNBAEverythingClient({
+    shouldReturnGameStats: true,
   });
 
   return (
@@ -39,13 +34,13 @@ export default function NBAEverythingGameBoxScore() {
           containerStyles={classNames('h-[260px] w-full lg:w-1/2 lg:block', {
             hidden: selectedTeamStats === 1,
           })}
-          rowData={getStatRows({ boxScoreData: nbaGameStats?.visitorTeam.boxScoreDataShort })}
+          rowData={getStatRows({ boxScoreData: currentGameStats?.visitorTeam.boxScoreDataShort })}
         />
         <NBAEverythingBoxScoreGrid
           containerStyles={classNames('h-[260px] w-full lg:w-1/2 lg:block', {
             hidden: selectedTeamStats === 0,
           })}
-          rowData={getStatRows({ boxScoreData: nbaGameStats?.homeTeam.boxScoreDataShort })}
+          rowData={getStatRows({ boxScoreData: currentGameStats?.homeTeam.boxScoreDataShort })}
         />
       </div>
     </>

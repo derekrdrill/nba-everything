@@ -609,10 +609,10 @@ const mockTeamsCurrent: NBATeam[] = [
   },
 ];
 
-const mockUseNBAEverythingState = ({
-  useNBAEverythingState,
+const mockUseNBAEverythingAtoms = ({
+  useNBAEverythingAtoms,
 }: {
-  useNBAEverythingState: {
+  useNBAEverythingAtoms: {
     selectedSeason?: number;
     selectedTeam?: NBATeam;
     selectedMode?: NBASelectedMode;
@@ -621,7 +621,7 @@ const mockUseNBAEverythingState = ({
   };
 }) => {
   // @ts-ignore
-  nbaEverythingStore.useNBAEverythingState = () => useNBAEverythingState;
+  nbaEverythingStore.useNBAEverythingAtoms = () => useNBAEverythingAtoms;
 };
 
 export {
@@ -633,5 +633,5 @@ export {
   mockTeamLAL,
   mockTeamStats,
   mockTeamsCurrent,
-  mockUseNBAEverythingState,
+  mockUseNBAEverythingAtoms,
 };

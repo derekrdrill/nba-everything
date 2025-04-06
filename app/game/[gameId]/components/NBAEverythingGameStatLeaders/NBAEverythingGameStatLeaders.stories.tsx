@@ -12,7 +12,7 @@ type Story = StoryObj<typeof NBAEverythingGameStatLeaders>;
 
 export const HomeTeamSelected: Story = {
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeamStats: 0,
     },
@@ -24,7 +24,7 @@ export const VisitorTeamSelected: Story = {
     queryClient: {
       // currentGameStats: mockSelectedGame,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeamStats: 1,
     },

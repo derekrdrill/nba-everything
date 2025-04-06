@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { Button, Dialog, DialogPanel, Tab, TabGroup, TabList } from '@headlessui/react';
+import classNames from 'classnames';
 
-import { useNBAEverythingState } from '@/store';
-import { getGameStats } from '@/app/game/[gameId]/api/get';
+import { useNBAEverythingAtoms } from '@/store';
+import { useNBAEverythingClient } from '@/app/_hooks';
 import {
   NBAEverythingGameBoxScore,
   NBAEverythingGameShimmer,
@@ -15,9 +15,7 @@ import {
   NBAEverythingGameTeamAndLogo,
   NBAEverythingGameTeamScore,
 } from '@/app/game/[gameId]/components';
-import { NBATeamStats, NBAGameStats } from '@/types';
 import '@/app/game/[gameId]/styles/nbaEverythingGame.css';
-import classNames from 'classnames';
 
 export default function NBAEverythingGame() {
   const pathName = usePathname();
@@ -30,37 +28,27 @@ export default function NBAEverythingGame() {
     setSelectedTeamStats,
     setSelectedGame,
     selectedMode,
-  } = useNBAEverythingState();
+  } = useNBAEverythingAtoms();
 
-  const { data: nbaTeamSeasonData, isPending: isNBATeamSeasonDataPending } = useQuery<NBATeamStats>(
-    {
-      enabled: !!(selectedTeam?.id && selectedSeason),
-      queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
-    },
-  );
-
-  const { isPending: isNBAGameStatsPending } = useQuery<{
-    homeTeam: NBAGameStats;
-    visitorTeam: NBAGameStats;
-  }>({
-    enabled: !!selectedGame?.id,
-    queryKey: ['getGameStats', selectedGame?.id],
-    queryFn: () => getGameStats({ gameId: selectedGame?.id }),
-  });
+  const { currentTeamSeasonData, isCurrentGameStatsPending, isCurrentTeamSeasonPending } =
+    useNBAEverythingClient({
+      shouldReturnGameStats: true,
+      shouldReturnTeamSeasonData: true,
+    });
 
   useEffect(() => {
     if (pathName.includes('game')) {
       const gameId = pathName.split('/')[2];
-      const game = nbaTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
+      const game = currentTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
       setSelectedGame(game);
     }
-  }, [pathName, nbaTeamSeasonData]);
+  }, [pathName, currentTeamSeasonData]);
 
   return (
     <Dialog
       className='flex items-center justify-center'
       onClose={() => setSelectedGame(undefined)}
-      open={!isNBATeamSeasonDataPending && !!selectedGame}
+      open={!isCurrentTeamSeasonPending && !!selectedGame}
     >
       <DialogPanel
         className={classNames('game-dialog-panel', {
@@ -85,9 +73,9 @@ export default function NBAEverythingGame() {
             <NBAEverythingGameTeamScore homeOrVisitor='home' styles='order-2 md:order-1' />
           </div>
         </div>
-        {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
+        {isCurrentGameStatsPending && <NBAEverythingGameShimmer />}
         <div className='px-6'>
-          {!isNBAGameStatsPending && (
+          {!isCurrentGameStatsPending && (
             <>
               <div className='flex justify-center lg:hidden'>
                 <TabGroup

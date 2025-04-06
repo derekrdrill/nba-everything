@@ -2,11 +2,11 @@
 import { Tab, TabGroup, TabList } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { TeamIcon } from '@/components/common/DarkLightTeamMode/_components';
 
 export default function DarkLightTeamMode() {
-  const { selectedMode, setSelectedMode } = useNBAEverythingState();
+  const { selectedMode, setSelectedMode } = useNBAEverythingAtoms();
 
   return (
     <TabGroup

@@ -15,7 +15,7 @@ export const Default: Story = {
     queryClient: {
       currentTeamSeasonData: mockTeamStats,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamLAL,
       selectedSeason: 2023,

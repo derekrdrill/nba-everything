@@ -1,19 +1,17 @@
 'use client';
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
 import { useMediaQuery } from 'react-responsive';
 import { FixedSizeGrid as NBAEverythingTeamGamesGrid } from 'react-window';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { NBAEverythingTeamGame } from '@/components/nba-everything/NBAEverythingTeamGames/components';
 import { getTeamModeSecondaryColor } from '@/helpers';
-import { NBATeamStats } from '@/types';
+import { useNBAEverythingClient } from '@/app/_hooks';
 
 export default function NBAEverythingTeamGames() {
-  const { selectedMode, selectedSeason, selectedTeam } = useNBAEverythingState();
-  const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+  const { selectedMode, selectedTeam } = useNBAEverythingAtoms();
+  const { currentTeamSeasonData } = useNBAEverythingClient({
+    shouldReturnTeamSeasonData: true,
   });
 
   const isXS = useMediaQuery({ maxWidth: 480 });

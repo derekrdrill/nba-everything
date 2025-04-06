@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { isHomeWin, isVisitorWin } from '@/app/game/[gameId]/helpers';
 
 type NBAEverythingGameStatusProps = {
@@ -9,7 +9,7 @@ type NBAEverythingGameStatusProps = {
 };
 
 export default function NBAEverythingGameStatus({ styles }: NBAEverythingGameStatusProps) {
-  const { selectedGame } = useNBAEverythingState();
+  const { selectedGame } = useNBAEverythingAtoms();
 
   const homeTeamScore = selectedGame?.home_team_score;
   const visitorTeamScore = selectedGame?.visitor_team_score;

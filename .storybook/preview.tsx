@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { Preview } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { mockUseNBAEverythingState, mockTeamsCurrent } from '../mocks';
+import { mockUseNBAEverythingAtoms, mockTeamsCurrent } from '../mocks';
 import { NBAGame, NBASelectedMode, NBATeam } from '../app/_types';
 import '../app/_styles/globals.css';
 
@@ -12,14 +12,14 @@ const preview: Preview = {
     (Story, context) => {
       const isLoading = context.parameters?.isLoading;
 
-      const useNBAEverythingState = context.parameters?.useNBAEverythingState;
+      const useNBAEverythingAtoms = context.parameters?.useNBAEverythingAtoms;
       const queryClientState = context.parameters?.queryClient;
 
-      const selectedGame = useNBAEverythingState?.selectedGame as NBAGame;
-      const selectedMode = useNBAEverythingState?.selectedMode as NBASelectedMode;
-      const selectedSeason = useNBAEverythingState?.selectedSeason as number;
-      const selectedTeam = useNBAEverythingState?.selectedTeam as NBATeam;
-      const selectedTeamStats = useNBAEverythingState?.selectedTeamStats as number;
+      const selectedGame = useNBAEverythingAtoms?.selectedGame as NBAGame;
+      const selectedMode = useNBAEverythingAtoms?.selectedMode as NBASelectedMode;
+      const selectedSeason = useNBAEverythingAtoms?.selectedSeason as number;
+      const selectedTeam = useNBAEverythingAtoms?.selectedTeam as NBATeam;
+      const selectedTeamStats = useNBAEverythingAtoms?.selectedTeamStats as number;
       const currentTeamSeasonData = queryClientState?.currentTeamSeasonData;
       const currentGameStats = queryClientState?.currentGameStats;
 
@@ -33,8 +33,8 @@ const preview: Preview = {
         },
       });
 
-      mockUseNBAEverythingState({
-        useNBAEverythingState: {
+      mockUseNBAEverythingAtoms({
+        useNBAEverythingAtoms: {
           selectedGame: selectedGame as NBAGame,
           selectedMode: selectedMode as NBASelectedMode,
           selectedSeason: selectedSeason as number,
@@ -45,14 +45,14 @@ const preview: Preview = {
 
       queryClient.setQueryData(['getCurrentTeams', null, null], mockTeamsCurrent);
       queryClient.setQueryData(
-        ['getGameStats', useNBAEverythingState?.selectedGame?.id],
+        ['getGameStats', useNBAEverythingAtoms?.selectedGame?.id],
         currentGameStats,
       );
       queryClient.setQueryData(
         [
           'getTeamSeasonData',
-          useNBAEverythingState?.selectedSeason,
-          useNBAEverythingState?.selectedTeam?.id,
+          useNBAEverythingAtoms?.selectedSeason,
+          useNBAEverythingAtoms?.selectedTeam?.id,
         ],
         currentTeamSeasonData,
       );

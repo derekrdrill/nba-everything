@@ -18,7 +18,7 @@ export const LightMode: Story = {
     statValue: '25.5',
   },
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
     },
@@ -31,7 +31,7 @@ export const DarkMode: Story = {
     statValue: '25.5',
   },
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'dark',
       selectedTeam: mockTeamCLT,
     },
@@ -44,7 +44,7 @@ export const TeamMode: Story = {
     statValue: '25.5',
   },
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'team',
       selectedTeam: mockTeamCLT,
     },
@@ -57,7 +57,7 @@ export const WinLoss: Story = {
     statValue: '55-27',
   },
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
     },

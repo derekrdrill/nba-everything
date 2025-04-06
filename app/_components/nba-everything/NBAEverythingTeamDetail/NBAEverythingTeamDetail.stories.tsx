@@ -13,7 +13,7 @@ type Story = StoryObj<typeof NBAEverythingTeamDetail>;
 
 export const LightMode: Story = {
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
     },
@@ -22,7 +22,7 @@ export const LightMode: Story = {
 
 export const DarkMode: Story = {
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'dark',
       selectedTeam: mockTeamCLT,
     },
@@ -31,7 +31,7 @@ export const DarkMode: Story = {
 
 export const TeamMode: Story = {
   parameters: {
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'team',
       selectedTeam: mockTeamCLT,
     },
@@ -41,7 +41,7 @@ export const TeamMode: Story = {
 export const Loading: Story = {
   parameters: {
     isLoading: true,
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
     },

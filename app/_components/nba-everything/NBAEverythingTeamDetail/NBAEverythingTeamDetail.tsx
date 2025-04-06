@@ -2,20 +2,18 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import { ShimmerDiv } from 'shimmer-effects-react';
-import { useQuery } from '@tanstack/react-query';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
+import { useNBAEverythingClient } from '@/app/_hooks';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
 import { getTeamModeSecondaryColor } from '@/helpers';
-import { NBATeam } from '@/types';
 
 export default function NBAEverythingTeamDetail() {
-  const { selectedMode, selectedTeam } = useNBAEverythingState();
-
-  const { isPending: isTeamDataPending } = useQuery<NBATeam[]>({
-    queryKey: ['getCurrentTeams'],
+  const { isCurrentTeamsPending } = useNBAEverythingClient({
+    shouldReturnTeams: true,
   });
+  const { selectedMode, selectedTeam } = useNBAEverythingAtoms();
 
   const getStubHubTeamName = ({ fullName }: { fullName?: string }) => {
     if (fullName === 'LA Clippers') {
@@ -28,7 +26,7 @@ export default function NBAEverythingTeamDetail() {
   return (
     <div className='grid grid-cols-5 gap-4'>
       <div className='col-span-full flex justify-center md:col-span-2'>
-        {isTeamDataPending && (
+        {isCurrentTeamsPending && (
           <ShimmerDiv
             className='h-80 rounded w-full sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
             height={0}
@@ -37,7 +35,7 @@ export default function NBAEverythingTeamDetail() {
             width={0}
           />
         )}
-        {!isTeamDataPending && selectedTeam && (
+        {!isCurrentTeamsPending && selectedTeam && (
           <NBAEverythingTeamLogo
             height={0}
             imageStyles={classNames('h-auto w-72', {
@@ -49,7 +47,7 @@ export default function NBAEverythingTeamDetail() {
         )}
       </div>
       <div className='col-span-full md:col-span-3'>
-        {isTeamDataPending && (
+        {isCurrentTeamsPending && (
           <div className='flex flex-col gap-2'>
             <ShimmerDiv className='rounded' height={45} loading mode='light' width={'90%'} />
             <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
@@ -58,7 +56,7 @@ export default function NBAEverythingTeamDetail() {
             <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
           </div>
         )}
-        {!isTeamDataPending && selectedTeam && (
+        {!isCurrentTeamsPending && selectedTeam && (
           <div
             className={classNames({
               'text-white': selectedMode === 'dark',

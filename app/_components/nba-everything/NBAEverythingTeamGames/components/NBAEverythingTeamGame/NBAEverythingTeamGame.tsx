@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
-import { NBATeamStats } from '@/types';
+import { useNBAEverythingClient } from '@/app/_hooks';
 
 type NBAEverythingTeamGameProps = {
   columnIndex: number;
@@ -17,10 +16,9 @@ export default function NBAEverythingTeamGame({
   rowIndex,
   style,
 }: NBAEverythingTeamGameProps) {
-  const { selectedSeason, selectedTeam } = useNBAEverythingState();
-  const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+  const { selectedTeam } = useNBAEverythingAtoms();
+  const { currentTeamSeasonData } = useNBAEverythingClient({
+    shouldReturnTeamSeasonData: true,
   });
 
   const gameData = currentTeamSeasonData?.gameData;

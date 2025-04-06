@@ -26,9 +26,13 @@
       "@/components/*": ["app/_components/*"],
       "@/game": ["app/game"],
       "@/helpers": ["app/_helpers"],
+      "@/hooks": ["app/_hooks"],
+      "@/hooks/*": ["app/_hooks/*"],
       "@/store": ["app/_store"],
+      "@/store/*": ["app/_store/*"],
       "@/styles/*": ["app/_styles/*"],
       "@/types": ["app/_types"],
+      "@/types/*": ["app/types/*"],
       "@/public/*": ["public/*"],
       "@/queryClient": ["client/queryClient"],
     }

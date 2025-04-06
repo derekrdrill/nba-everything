@@ -1,9 +1,8 @@
 'use client';
 import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { ShimmerDiv } from 'shimmer-effects-react';
 
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import {
   NBAEverythingSeasonAverages,
   NBAEverythingSeasonSearch,
@@ -11,24 +10,13 @@ import {
   NBAEverythingTeamGames,
   NBAEverythingTeamSearch,
 } from '@/components/nba-everything';
-import { getCurrentTeams, getTeamSeasonData } from '@/api/get';
+import { useNBAEverythingClient } from '@/app/_hooks';
 import { getTeamModeMainColor } from '@/helpers';
-import { NBATeamStats, NBATeam } from '@/types';
 
 export default function NBAEverything() {
-  const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingState();
-
-  console.log(selectedTeam);
-
-  useQuery<NBATeam[]>({
-    queryKey: ['getCurrentTeams'],
-    queryFn: getCurrentTeams,
-  });
-
-  const { isPending: isCurrentTeamSeasonAvgsPending } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
-    queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
+  const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingAtoms();
+  const { isCurrentTeamSeasonPending } = useNBAEverythingClient({
+    shouldReturnTeamSeasonData: true,
   });
 
   useEffect(() => {
@@ -64,7 +52,7 @@ export default function NBAEverything() {
           <NBAEverythingTeamDetail />
         </div>
         <div className='col-span-full md:col-span-1'>
-          {isCurrentTeamSeasonAvgsPending && (
+          {isCurrentTeamSeasonPending && (
             <div className='flex flex-col gap-8 md:flex-row'>
               <ShimmerDiv
                 className='h-12 rounded w-full md:h-[400px] md:w-[18%]'
@@ -82,7 +70,7 @@ export default function NBAEverything() {
               />
             </div>
           )}
-          {!isCurrentTeamSeasonAvgsPending && (
+          {!isCurrentTeamSeasonPending && (
             <div className='grid grid-cols-12 gap-8'>
               <NBAEverythingSeasonAverages />
               <NBAEverythingTeamGames />

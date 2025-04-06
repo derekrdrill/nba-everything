@@ -25,7 +25,7 @@ export const HomeWin: Story = {
     queryClient: {
       currentTeamSeasonData: mockSeasonGameData,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
       selectedSeason: '2023-24',
@@ -43,7 +43,7 @@ export const HomeLoss: Story = {
     queryClient: {
       currentTeamSeasonData: mockSeasonGameData,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
       selectedSeason: '2023-24',
@@ -61,7 +61,7 @@ export const VisitorWin: Story = {
     queryClient: {
       currentTeamSeasonData: mockSeasonGameData,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
       selectedSeason: '2023-24',
@@ -79,7 +79,7 @@ export const VisitorLoss: Story = {
     queryClient: {
       currentTeamSeasonData: mockSeasonGameData,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
       selectedSeason: '2023-24',

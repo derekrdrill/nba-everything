@@ -1,6 +1,6 @@
 'use client';
 import classNames from 'classnames';
-import { useNBAEverythingState } from '@/store';
+import { useNBAEverythingAtoms } from '@/store';
 import { getTeamModeSecondaryColor } from '@/helpers';
 
 type NBASeasonAverageProps = {
@@ -9,7 +9,7 @@ type NBASeasonAverageProps = {
 };
 
 export default function NBASeasonAverage({ statValue, statTitle }: NBASeasonAverageProps) {
-  const { selectedMode, selectedTeam } = useNBAEverythingState();
+  const { selectedMode, selectedTeam } = useNBAEverythingAtoms();
   return (
     statValue &&
     statTitle && (

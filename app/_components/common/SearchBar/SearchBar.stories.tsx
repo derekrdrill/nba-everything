@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { mockUseNBAEverythingState } from '@/mocks';
+import { mockUseNBAEverythingAtoms } from '@/mocks';
 import SearchBar from './SearchBar';
 
 const meta: Meta<typeof SearchBar> = {
@@ -11,8 +11,8 @@ const meta: Meta<typeof SearchBar> = {
   },
   decorators: [
     (Story, context) => {
-      mockUseNBAEverythingState({
-        useNBAEverythingState: context.parameters.mockData?.useNBAEverythingState,
+      mockUseNBAEverythingAtoms({
+        useNBAEverythingAtoms: context.parameters.mockData?.useNBAEverythingAtoms,
       });
 
       return (
@@ -45,7 +45,7 @@ export const Default: Story = {
   },
   parameters: {
     mockData: {
-      useNBAEverythingState: {
+      useNBAEverythingAtoms: {
         selectedMode: 'light',
       },
     },
@@ -59,7 +59,7 @@ export const DarkMode: Story = {
   },
   parameters: {
     mockData: {
-      useNBAEverythingState: {
+      useNBAEverythingAtoms: {
         selectedMode: 'dark',
       },
     },
@@ -73,7 +73,7 @@ export const TeamMode: Story = {
   },
   parameters: {
     mockData: {
-      useNBAEverythingState: {
+      useNBAEverythingAtoms: {
         selectedMode: 'team',
         selectedTeam: {
           colors: {
@@ -96,7 +96,7 @@ export const Disabled: Story = {
   },
   parameters: {
     mockData: {
-      useNBAEverythingState: {
+      useNBAEverythingAtoms: {
         selectedMode: 'light',
       },
     },

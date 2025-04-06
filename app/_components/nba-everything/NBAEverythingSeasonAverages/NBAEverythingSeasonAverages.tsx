@@ -1,15 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { useNBAEverythingState } from '@/store';
 import { NBASeasonAverage } from '@/components/nba-everything/NBAEverythingSeasonAverages/components';
-import { NBATeamStats } from '@/types';
+import { useNBAEverythingClient } from '@/app/_hooks';
 
 export default function NBAEverythingSeasonAverages() {
-  const { selectedTeam, selectedSeason } = useNBAEverythingState();
-
-  const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+  const { currentTeamSeasonData } = useNBAEverythingClient({
+    shouldReturnTeamSeasonData: true,
   });
 
   return (

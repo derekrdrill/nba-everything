@@ -15,7 +15,7 @@ export const LightMode: Story = {
     queryClient: {
       currentTeamSeasonData: mockTeamStats,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'light',
       selectedTeam: mockTeamCLT,
       selectedSeason: 2023,
@@ -28,7 +28,7 @@ export const DarkMode: Story = {
     queryClient: {
       currentTeamSeasonData: mockTeamStats,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'dark',
       selectedTeam: mockTeamCLT,
       selectedSeason: 2023,
@@ -41,7 +41,7 @@ export const TeamMode: Story = {
     queryClient: {
       currentTeamSeasonData: mockTeamStats,
     },
-    useNBAEverythingState: {
+    useNBAEverythingAtoms: {
       selectedMode: 'team',
       selectedTeam: mockTeamCLT,
       selectedSeason: 2023,

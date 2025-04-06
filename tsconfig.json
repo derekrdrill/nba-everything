@@ -28,6 +28,7 @@
       "@/helpers": ["app/_helpers"],
       "@/hooks": ["app/_hooks"],
       "@/hooks/*": ["app/_hooks/*"],
+      "@/mocks": ["mocks/"],
       "@/store": ["app/_store"],
       "@/store/*": ["app/_store/*"],
       "@/styles/*": ["app/_styles/*"],

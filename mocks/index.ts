@@ -1,5 +1,6 @@
-import { NBATeamStats, NBATeam, NBAGame, NBASelectedMode } from '@/types';
+import * as nbaEverythingHooks from '@/hooks';
 import * as nbaEverythingStore from '@/store';
+import { NBATeamStats, NBATeam, NBAGame, NBASelectedMode, NBAGameStats } from '@/types';
 
 const mockSelectedGame = {
   id: 123456,
@@ -624,6 +625,26 @@ const mockUseNBAEverythingAtoms = ({
   nbaEverythingStore.useNBAEverythingAtoms = () => useNBAEverythingAtoms;
 };
 
+const mockUseNBAEverythingClient = ({
+  useNBAEverythingClient,
+}: {
+  useNBAEverythingClient: {
+    currentGameStats?: {
+      homeTeam: NBAGameStats;
+      visitorTeam: NBAGameStats;
+    };
+    currentTeamsData?: NBATeam[];
+    currentTeamSeasonData?: NBATeamStats;
+    currentTeams?: NBATeam[];
+    isCurrentGameStatsPending?: boolean;
+    isCurrentTeamsPending?: boolean;
+    isCurrentTeamSeasonPending?: boolean;
+  };
+}) => {
+  // @ts-ignore
+  nbaEverythingHooks.useNBAEverythingClient = () => useNBAEverythingClient;
+};
+
 export {
   mockBoxScoreGames,
   mockSelectedGame,
@@ -634,4 +655,5 @@ export {
   mockTeamStats,
   mockTeamsCurrent,
   mockUseNBAEverythingAtoms,
+  mockUseNBAEverythingClient,
 };

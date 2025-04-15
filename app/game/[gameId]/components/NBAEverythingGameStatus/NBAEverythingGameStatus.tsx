@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ArrowLeftIcon, ArrowRightIcon } from '@node_modules/@heroicons/react/20/solid';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 
 import { useNBAEverythingStore } from '@/store';
 import { isHomeWin, isVisitorWin } from '@/app/game/[gameId]/helpers';

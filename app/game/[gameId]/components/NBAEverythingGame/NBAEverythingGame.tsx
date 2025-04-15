@@ -17,6 +17,7 @@ import {
 } from '@/app/game/[gameId]/components';
 import { NBATeamStats, NBAGameStats } from '@/types';
 import '@/app/game/[gameId]/styles/nbaEverythingGame.css';
+import classNames from 'classnames';
 
 export default function NBAEverythingGame() {
   const pathName = usePathname();
@@ -28,6 +29,7 @@ export default function NBAEverythingGame() {
     selectedTeamStats,
     setSelectedTeamStats,
     setSelectedGame,
+    selectedMode,
   } = useNBAEverythingStore();
 
   const { data: nbaTeamSeasonData, isPending: isNBATeamSeasonDataPending } = useQuery<NBATeamStats>(
@@ -60,7 +62,18 @@ export default function NBAEverythingGame() {
       onClose={() => setSelectedGame(undefined)}
       open={!isNBATeamSeasonDataPending && !!selectedGame}
     >
-      <DialogPanel className='game-dialog-panel'>
+      <DialogPanel
+        className={classNames('game-dialog-panel', {
+          'bg-white': selectedMode === 'light',
+          'bg-gray-900 text-white': selectedMode === 'dark',
+        })}
+        style={{
+          ...(selectedMode === 'team' && {
+            backgroundColor: `#${selectedTeam?.colors.secondary}`,
+            color: `#${selectedTeam?.colors.primary}`,
+          }),
+        }}
+      >
         <div className='flex flex-col gap-4 mb-12 pt-8 px-14 md:flex-row md:justify-around md:pt-16 md:px-24'>
           <div className='flex gap-4 justify-between order-2 md:order-1'>
             <NBAEverythingGameTeamAndLogo homeOrVisitor='visitor' />
@@ -100,7 +113,7 @@ export default function NBAEverythingGame() {
             </>
           )}
         </div>
-        <div className='bg-white bottom-0 flex justify-end pb-6 pt-4 px-8 sticky z-50'>
+        <div className='bottom-0 flex justify-end pb-6 pt-4 px-8 sticky z-50'>
           <Button
             className='btn-secondary-md-outline'
             onClick={() => {

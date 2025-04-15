@@ -8,6 +8,8 @@ import NBAStadium from './NBAStadium/NBAStadium';
 import NBATeam from './NBATeam/NBATeam';
 import NBATeamStats from './NBATeamStats/NBATeamStats';
 
+type NBASelectedMode = 'dark' | 'light' | 'team';
+
 export type {
   NBABoxScoreShort,
   NBAGame,
@@ -15,6 +17,7 @@ export type {
   NBAGameBoxScoreShort,
   NBAGameStat,
   NBAGameStats,
+  NBASelectedMode,
   NBAStadium,
   NBATeam,
   NBATeamStats,

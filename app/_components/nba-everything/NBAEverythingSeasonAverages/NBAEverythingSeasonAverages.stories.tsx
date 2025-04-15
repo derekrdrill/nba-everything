@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import classNames from 'classnames';
+
+import { useNBAEverythingStore } from '@/store';
 import NBAEverythingSeasonAverages from './NBAEverythingSeasonAverages';
 import { mockTeam, mockTeamStats } from './mocks';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useNBAEverythingStore } from '@/store';
-import classNames from 'classnames';
 
 const meta: Meta<typeof NBAEverythingSeasonAverages> = {
   title: 'Components/NBAEverything/NBAEverythingSeasonAverages',
@@ -21,10 +22,10 @@ const meta: Meta<typeof NBAEverythingSeasonAverages> = {
       });
 
       // Get the selectedMode from the story parameters
-      const selectedMode = context.parameters?.selectedMode || 'light';
-      const selectedTeam = context.parameters?.selectedTeam || mockTeam;
-      const selectedSeason = context.parameters?.selectedSeason || 2023;
-      const mockData = context.parameters?.mockData || mockTeamStats;
+      const selectedMode = context.parameters?.useNBAEverythingStore?.selectedMode;
+      const selectedTeam = context.parameters?.useNBAEverythingStore?.selectedTeam;
+      const selectedSeason = context.parameters?.useNBAEverythingStore?.selectedSeason;
+      const mockData = context.parameters?.queryClient?.currentTeamSeasonData;
 
       // Set up the store with the desired state
       useNBAEverythingStore.setState({
@@ -56,9 +57,6 @@ const meta: Meta<typeof NBAEverythingSeasonAverages> = {
       );
     },
   ],
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export default meta;
@@ -66,27 +64,39 @@ type Story = StoryObj<typeof NBAEverythingSeasonAverages>;
 
 export const LightMode: Story = {
   parameters: {
-    selectedMode: 'light',
-    selectedTeam: mockTeam,
-    selectedSeason: 2023,
-    mockData: mockTeamStats,
+    queryClient: {
+      currentTeamSeasonData: mockTeamStats,
+    },
+    useNBAEverythingStore: {
+      selectedMode: 'light',
+      selectedTeam: mockTeam,
+      selectedSeason: 2023,
+    },
   },
 };
 
 export const DarkMode: Story = {
   parameters: {
-    selectedMode: 'dark',
-    selectedTeam: mockTeam,
-    selectedSeason: 2023,
-    mockData: mockTeamStats,
+    queryClient: {
+      currentTeamSeasonData: mockTeamStats,
+    },
+    useNBAEverythingStore: {
+      selectedMode: 'dark',
+      selectedTeam: mockTeam,
+      selectedSeason: 2023,
+    },
   },
 };
 
 export const TeamMode: Story = {
   parameters: {
-    selectedMode: 'team',
-    selectedTeam: mockTeam,
-    selectedSeason: 2023,
-    mockData: mockTeamStats,
+    queryClient: {
+      currentTeamSeasonData: mockTeamStats,
+    },
+    useNBAEverythingStore: {
+      selectedMode: 'team',
+      selectedTeam: mockTeam,
+      selectedSeason: 2023,
+    },
   },
 };

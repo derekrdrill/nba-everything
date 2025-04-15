@@ -9,8 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test:jest": "yarn run jest",
-    "test:storybook": "npx chromatic --project-token=chpt_b1970d946546b69"
+    "test:jest": "yarn run jest"
   },
   "dependencies": {
     "@balldontlie/sdk": "^1.2.2",

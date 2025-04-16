@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { Button, Dialog, DialogPanel, Tab, TabGroup, TabList } from '@headlessui/react';
+import classNames from 'classnames';
 
-import { useNBAEverythingStore } from '@store';
-import { getGameStats } from '@app/game/[gameId]/api/get';
+import { useNBAEverythingAtoms } from '@/store';
+import { useNBAEverythingClient } from '@/app/_hooks';
 import {
   NBAEverythingGameBoxScore,
   NBAEverythingGameShimmer,
@@ -14,9 +14,8 @@ import {
   NBAEverythingGameStatus,
   NBAEverythingGameTeamAndLogo,
   NBAEverythingGameTeamScore,
-} from '@app/game/[gameId]/components';
-import { NBATeamStats, NBAGameStats } from '@types';
-import '@app/game/[gameId]/styles/nbaEverythingGame.css';
+} from '@/app/game/[gameId]/components';
+import '@/app/game/[gameId]/styles/nbaEverythingGame.css';
 
 export default function NBAEverythingGame() {
   const pathName = usePathname();
@@ -28,53 +27,55 @@ export default function NBAEverythingGame() {
     selectedTeamStats,
     setSelectedTeamStats,
     setSelectedGame,
-  } = useNBAEverythingStore();
+    selectedMode,
+  } = useNBAEverythingAtoms();
 
-  const { data: nbaTeamSeasonData, isPending: isNBATeamSeasonDataPending } = useQuery<NBATeamStats>(
-    {
-      enabled: !!(selectedTeam?.id && selectedSeason),
-      queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
-    },
-  );
-
-  const { isPending: isNBAGameStatsPending } = useQuery<{
-    homeTeam: NBAGameStats;
-    visitorTeam: NBAGameStats;
-  }>({
-    enabled: !!selectedGame?.id,
-    queryKey: ['getGameStats', selectedGame?.id],
-    queryFn: () => getGameStats({ gameId: selectedGame?.id }),
-  });
+  const { currentTeamSeasonData, isCurrentGameStatsPending, isCurrentTeamSeasonPending } =
+    useNBAEverythingClient({
+      shouldReturnGameStats: true,
+      shouldReturnTeamSeasonData: true,
+    });
 
   useEffect(() => {
     if (pathName.includes('game')) {
       const gameId = pathName.split('/')[2];
-      const game = nbaTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
+      const game = currentTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
       setSelectedGame(game);
     }
-  }, [pathName, nbaTeamSeasonData]);
+  }, [pathName, currentTeamSeasonData]);
 
   return (
     <Dialog
       className='flex items-center justify-center'
       onClose={() => setSelectedGame(undefined)}
-      open={!isNBATeamSeasonDataPending && !!selectedGame}
+      open={!isCurrentTeamSeasonPending && !!selectedGame}
     >
-      <DialogPanel className='game-dialog-panel'>
-        <div className='flex flex-col gap-4 pt-16 px-14 md:px-24'>
-          <div className='flex justify-between'>
+      <DialogPanel
+        className={classNames('game-dialog-panel', {
+          'bg-white': selectedMode === 'light',
+          'bg-gray-900 text-white': selectedMode === 'dark',
+        })}
+        style={{
+          ...(selectedMode === 'team' && {
+            backgroundColor: `#${selectedTeam?.colors.secondary}`,
+            color: `#${selectedTeam?.colors.primary}`,
+          }),
+        }}
+      >
+        <div className='flex flex-col gap-4 mb-12 pt-8 px-14 md:flex-row md:justify-around md:pt-16 md:px-24'>
+          <div className='flex gap-4 justify-between order-2 md:order-1'>
             <NBAEverythingGameTeamAndLogo homeOrVisitor='visitor' />
-            <div className='flex gap-16 justify-between'>
-              <NBAEverythingGameTeamScore homeOrVisitor='visitor' />
-              <NBAEverythingGameStatus />
-              <NBAEverythingGameTeamScore homeOrVisitor='home' />
-            </div>
-            <NBAEverythingGameTeamAndLogo homeOrVisitor='home' />
+            <NBAEverythingGameTeamScore homeOrVisitor='visitor' />
           </div>
-          {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
+          <NBAEverythingGameStatus styles='order-1 md:order-2' />
+          <div className='flex gap-4 justify-between order-2 md:order-3'>
+            <NBAEverythingGameTeamAndLogo homeOrVisitor='home' styles='order-1 md:order-2' />
+            <NBAEverythingGameTeamScore homeOrVisitor='home' styles='order-2 md:order-1' />
+          </div>
         </div>
+        {isCurrentGameStatsPending && <NBAEverythingGameShimmer />}
         <div className='px-6'>
-          {!isNBAGameStatsPending && (
+          {!isCurrentGameStatsPending && (
             <>
               <div className='flex justify-center lg:hidden'>
                 <TabGroup
@@ -100,7 +101,7 @@ export default function NBAEverythingGame() {
             </>
           )}
         </div>
-        <div className='bottom-0 flex justify-end p-8 sticky'>
+        <div className='bottom-0 flex justify-end pb-6 pt-4 px-8 sticky z-50'>
           <Button
             className='btn-secondary-md-outline'
             onClick={() => {

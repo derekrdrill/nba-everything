@@ -1,4 +1,4 @@
-import { NBATeam } from '@types';
+import { NBATeam } from '@/types';
 
 type NBASeasonData = {
   apg: number;

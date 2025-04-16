@@ -1,24 +1,20 @@
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
-import { useNBAEverythingStore } from '@store';
-import { NBAEverythingGameTeamStatLeaders } from '@app/game/[gameId]/components';
-import { NBAGameStats } from '@types';
+import { useNBAEverythingAtoms } from '@/store';
+import { NBAEverythingGameTeamStatLeaders } from '@/app/game/[gameId]/components';
+import { useNBAEverythingClient } from '@/app/_hooks';
 
 export default function NBAEverythingGameStatLeaders() {
-  const { selectedGame, selectedTeamStats } = useNBAEverythingStore();
+  const { selectedTeamStats } = useNBAEverythingAtoms();
 
-  const { data: nbaGameStats } = useQuery<{
-    homeTeam: NBAGameStats;
-    visitorTeam: NBAGameStats;
-  }>({
-    queryKey: ['getGameStats', selectedGame?.id],
+  const { currentGameStats } = useNBAEverythingClient({
+    shouldReturnGameStats: true,
   });
 
-  const homeStatLeaders = nbaGameStats?.homeTeam.statLeaders;
-  const visitorStatLeaders = nbaGameStats?.visitorTeam.statLeaders;
+  const homeStatLeaders = currentGameStats?.homeTeam.statLeaders;
+  const visitorStatLeaders = currentGameStats?.visitorTeam.statLeaders;
 
   return (
-    <div className='flex flex-col gap-4 mx-16'>
+    <div className='flex flex-col gap-4 mx-auto md:mx-16'>
       <h2 className='text-2xl text-center'>Stat Leaders</h2>
       <div className='flex justify-center lg:justify-between'>
         <NBAEverythingGameTeamStatLeaders

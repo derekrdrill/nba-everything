@@ -1,16 +1,18 @@
 .game-dialog-panel {
     @apply
-        bg-white
-        container
         fixed
         flex 
         flex-col 
-        h-[86vh]
+        min-h-[86vh]
         justify-between
-        mx-auto
+        mx-96
         rounded-md
         shadow-lg
         top-[8%] 
+        w-[90%]
         sm:top-[10%]
-        md:h-[80vh]
+        sm:w-full
+        md:container
+        md:min-h-[80vh]
+        md:mx-auto
 }

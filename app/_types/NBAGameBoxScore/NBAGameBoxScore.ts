@@ -1,4 +1,4 @@
-import { NBAGame, NBATeam } from '@types';
+import { NBAGame, NBATeam } from '@/types';
 
 type NBAGameBoxScore = {
   id: number;

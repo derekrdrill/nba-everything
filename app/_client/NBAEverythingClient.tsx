@@ -1,6 +1,6 @@
 'use client';
 
-import queryClient from '@queryClient';
+import queryClient from '@/queryClient';
 import { QueryClientProvider as NBAEverythingClientProvider } from '@tanstack/react-query';
 
 type NBAEverythingLayoutProps = {

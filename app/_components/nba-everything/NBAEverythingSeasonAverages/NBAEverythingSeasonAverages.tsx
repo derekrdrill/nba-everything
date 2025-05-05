@@ -1,14 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { useNBAEverythingStore } from '@store';
-import { NBASeasonAverage } from '@components/nba-everything/NBAEverythingSeasonAverages/components';
-import { NBATeamStats } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { NBASeasonAverage } from '@/components/nba-everything/NBAEverythingSeasonAverages/components';
+import { useNBAEverythingQuery } from '@/hooks';
 
 export default function NBAEverythingSeasonAverages() {
   const { selectedTeam, selectedSeason } = useNBAEverythingStore();
-  const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+
+  // const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
+  //   enabled: !!(selectedTeam?.id && selectedSeason),
+  //   queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+  //   // queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
+  // });
+
+  const { currentTeamSeasonData } = useNBAEverythingQuery({
+    selectedTeam: selectedTeam,
+    selectedSeason: selectedSeason,
   });
 
   return (

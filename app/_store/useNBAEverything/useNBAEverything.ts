@@ -1,31 +1,37 @@
 import { create } from 'zustand';
+import { useShallow } from 'zustand/react/shallow';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { NBAGame, NBATeam } from '@types';
+import { NBAGame, NBATeam, NBASelectedMode } from '@/app/_types';
 
 type NBAEverythingState = {
   selectedGame?: NBAGame;
-  selectedSeason?: number;
+  selectedMode: NBASelectedMode;
+  selectedSeason: number;
   selectedTeam?: NBATeam;
-  selectedTeamStats?: number;
-  setSelectedGame: (game?: NBAGame) => void;
-  setSelectedSeason: (season: number) => void;
-  setSelectedTeam: (team: NBATeam) => void;
-  setSelectedTeamStats: (team?: number) => void;
+  selectedTeamStats: number;
+  setSelectedGame: (selectedGame?: NBAGame) => void;
+  setSelectedMode: (selectedMode: NBASelectedMode) => void;
+  setSelectedSeason: (selectedSeason: number) => void;
+  setSelectedTeam: (selectedTeam: NBATeam) => void;
+  setSelectedTeamStats: (selectedTeamStats: number) => void;
 };
 
-export const useNBAEverythingStore = create<NBAEverythingState>()(
+const useNBAEverythingStore = create<NBAEverythingState>()(
   persist(
-    (set, get) => ({
+    set => ({
+      selectedMode: 'light',
       selectedSeason: 2024,
       selectedTeamStats: 0,
-      setSelectedGame: game => set({ selectedGame: game }),
-      setSelectedTeam: team => set({ selectedTeam: team }),
-      setSelectedSeason: season => set({ selectedSeason: season }),
-      setSelectedTeamStats: team => set({ selectedTeamStats: team }),
+      setSelectedGame: selectedGame => set({ selectedGame }),
+      setSelectedMode: selectedMode => set({ selectedMode }),
+      setSelectedTeam: selectedTeam => set({ selectedTeam }),
+      setSelectedSeason: selectedSeason => set({ selectedSeason }),
+      setSelectedTeamStats: selectedTeamStats => set({ selectedTeamStats }),
     }),
     {
       name: 'nba-everything-session',
       partialize: state => ({
+        selectedMode: state.selectedMode,
         selectedSeason: state.selectedSeason,
         selectedTeam: state.selectedTeam,
       }),
@@ -34,4 +40,8 @@ export const useNBAEverythingStore = create<NBAEverythingState>()(
   ),
 );
 
-export default useNBAEverythingStore;
+const useShallowNBAEverythingStore = <T>(selector: (state: NBAEverythingState) => T) =>
+  useNBAEverythingStore(useShallow(selector));
+
+export default useShallowNBAEverythingStore;
+export { useNBAEverythingStore };

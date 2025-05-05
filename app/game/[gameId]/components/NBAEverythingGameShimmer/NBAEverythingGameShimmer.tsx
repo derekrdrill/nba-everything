@@ -6,15 +6,15 @@ const NBAEverythingGameShimmerDiv = () => {
 
 export default function NBAEverythingGameShimmer() {
   return (
-    <div className='grid grid-cols-2 gap-4 mt-16 mx-6 md:mx-10 lg:mx-12 xl:mx-2'>
-      <div className='col-span-1 flex flex-col gap-4'>
+    <div className='grid grid-cols-1 gap-4 mx-6 md:mx-10 lg:grid-cols-2 lg:mx-12'>
+      <div className='col-span-1 flex flex-col gap-4 place-items-center lg:place-items-start'>
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />
       </div>
-      <div className='col-span-1 flex flex-col gap-4 justify-end items-end'>
+      <div className='col-span-1 flex-col gap-4 hidden items-end justify-end lg:flex'>
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />
         <NBAEverythingGameShimmerDiv />

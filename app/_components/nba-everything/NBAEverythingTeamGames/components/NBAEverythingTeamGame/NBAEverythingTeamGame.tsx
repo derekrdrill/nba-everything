@@ -2,9 +2,9 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@store';
-import { NBAEverythingTeamLogo } from '@components/nba-everything';
-import { NBATeamStats } from '@types';
+import { useNBAEverythingStore } from '@/store';
+import { NBAEverythingTeamLogo } from '@/components/nba-everything';
+import { NBATeamStats } from '@/types';
 
 type NBAEverythingTeamGameProps = {
   columnIndex: number;

@@ -3,7 +3,7 @@ import { AgGridReact as NBAEverythingStatGrid } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 
-import { NBABoxScoreShort } from '@types';
+import { NBABoxScoreShort } from '@/types';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 

@@ -9,6 +9,11 @@ type NBATeamStats = {
   rpg: number;
   spg: number;
   wins: number;
+  pagination: {
+    perPage: number;
+    totalGames: number;
+    nextCursor: number;
+  };
 };
 
 export default NBATeamStats;

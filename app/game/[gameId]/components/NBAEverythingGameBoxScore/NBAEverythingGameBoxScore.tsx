@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNBAEverythingStore } from '@/store';
 import { NBAEverythingBoxScoreGrid } from '@/components/nba-everything';
 import { NBABoxScoreShort, NBAGameStats, NBAGameBoxScoreShort } from '@/types';
+import { getGameStats } from '../../api/get';
 
 const getStatRows = ({
   boxScoreData,
@@ -27,8 +28,9 @@ export default function NBAEverythingGameBoxScore() {
     homeTeam: NBAGameStats;
     visitorTeam: NBAGameStats;
   }>({
-    enabled: !!selectedGame?.id,
     queryKey: ['getGameStats', selectedGame?.id],
+    queryFn: () => getGameStats({ gameId: selectedGame?.id }),
+    enabled: !!selectedGame?.id,
   });
 
   return (

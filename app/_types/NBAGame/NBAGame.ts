@@ -16,6 +16,11 @@ type NBAGame = {
   visitor_team_id?: NBATeam;
   visitor_team_score: number;
   win?: boolean;
+  pagination: {
+    perPage: number;
+    totalGames: number;
+    nextCursor: number;
+  };
 };
 
 export default NBAGame;

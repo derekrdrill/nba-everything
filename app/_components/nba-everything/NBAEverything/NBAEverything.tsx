@@ -18,8 +18,6 @@ import { NBATeamStats, NBATeam } from '@/types';
 export default function NBAEverything() {
   const { selectedMode, selectedTeam, selectedSeason } = useNBAEverythingStore();
 
-  console.log(selectedTeam);
-
   useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
     queryFn: getCurrentTeams,

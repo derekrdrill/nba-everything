@@ -9,12 +9,14 @@ import { useNBAEverythingStore } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
 import { getTeamModeSecondaryColor } from '@/helpers';
 import { NBATeam } from '@/types';
+import { getCurrentTeams } from '@/app/_api/get';
 
 export default function NBAEverythingTeamDetail() {
   const { selectedMode, selectedTeam } = useNBAEverythingStore();
 
   const { isPending: isTeamDataPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
+    queryFn: getCurrentTeams,
   });
 
   const getStubHubTeamName = ({ fullName }: { fullName?: string }) => {

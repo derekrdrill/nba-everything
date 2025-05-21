@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNBAEverythingStore } from '@/store';
 import { NBAEverythingGameTeamStatLeaders } from '@/app/game/[gameId]/components';
 import { NBAGameStats } from '@/types';
+import { getGameStats } from '../../api/get';
 
 export default function NBAEverythingGameStatLeaders() {
   const { selectedGame, selectedTeamStats } = useNBAEverythingStore();
@@ -12,6 +13,8 @@ export default function NBAEverythingGameStatLeaders() {
     visitorTeam: NBAGameStats;
   }>({
     queryKey: ['getGameStats', selectedGame?.id],
+    queryFn: () => getGameStats({ gameId: selectedGame?.id }),
+    enabled: !!selectedGame?.id,
   });
 
   const homeStatLeaders = nbaGameStats?.homeTeam.statLeaders;

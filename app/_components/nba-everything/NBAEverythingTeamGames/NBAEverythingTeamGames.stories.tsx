@@ -65,6 +65,11 @@ const mockGames: NBAGame[] = [
       logo: 'https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg',
     },
     win: true,
+    pagination: {
+      perPage: 10,
+      totalGames: 82,
+      nextCursor: 2,
+    },
   },
   {
     id: 2,
@@ -87,6 +92,11 @@ const mockGames: NBAGame[] = [
       logo: 'https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg',
     },
     win: false,
+    pagination: {
+      perPage: 10,
+      totalGames: 82,
+      nextCursor: 2,
+    },
   },
   {
     id: 3,
@@ -109,6 +119,11 @@ const mockGames: NBAGame[] = [
       logo: 'https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg',
     },
     win: true,
+    pagination: {
+      perPage: 10,
+      totalGames: 82,
+      nextCursor: 2,
+    },
   },
   {
     id: 4,
@@ -131,6 +146,11 @@ const mockGames: NBAGame[] = [
       logo: 'https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg',
     },
     win: false,
+    pagination: {
+      perPage: 10,
+      totalGames: 82,
+      nextCursor: 2,
+    },
   },
 ];
 
@@ -143,6 +163,11 @@ const mockTeamStats: NBATeamStats = {
   rpg: 42.3,
   spg: 7.8,
   wins: 35,
+  pagination: {
+    perPage: 10,
+    totalGames: 82,
+    nextCursor: 2,
+  },
 };
 
 // Story configuration

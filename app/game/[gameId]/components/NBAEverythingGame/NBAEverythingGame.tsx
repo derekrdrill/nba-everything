@@ -18,11 +18,13 @@ import {
 import { NBATeamStats, NBAGameStats } from '@/types';
 import '@/app/game/[gameId]/styles/nbaEverythingGame.css';
 import classNames from 'classnames';
+import { getTeamSeasonData } from '@/api/get';
 
 export default function NBAEverythingGame() {
   const pathName = usePathname();
   const router = useRouter();
   const {
+    currentTeamSeasonData,
     selectedSeason,
     selectedTeam,
     selectedGame,
@@ -32,12 +34,11 @@ export default function NBAEverythingGame() {
     selectedMode,
   } = useNBAEverythingStore();
 
-  const { data: nbaTeamSeasonData, isPending: isNBATeamSeasonDataPending } = useQuery<NBATeamStats>(
-    {
-      enabled: !!(selectedTeam?.id && selectedSeason),
-      queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
-    },
-  );
+  const { isPending: isCurrentTeamSeasonPending } = useQuery<NBATeamStats>({
+    enabled: !!(selectedTeam?.id && selectedSeason),
+    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+    queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
+  });
 
   const { isPending: isNBAGameStatsPending } = useQuery<{
     homeTeam: NBAGameStats;
@@ -51,16 +52,25 @@ export default function NBAEverythingGame() {
   useEffect(() => {
     if (pathName.includes('game')) {
       const gameId = pathName.split('/')[2];
-      const game = nbaTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
+      const game = currentTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
+
       setSelectedGame(game);
     }
-  }, [pathName, nbaTeamSeasonData]);
+  }, [pathName, currentTeamSeasonData]);
+
+  if (isCurrentTeamSeasonPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (!currentTeamSeasonData) {
+    return null;
+  }
 
   return (
     <Dialog
       className='flex items-center justify-center'
       onClose={() => setSelectedGame(undefined)}
-      open={!isNBATeamSeasonDataPending && !!selectedGame}
+      open={!isCurrentTeamSeasonPending && !!selectedGame}
     >
       <DialogPanel
         className={classNames('game-dialog-panel', {

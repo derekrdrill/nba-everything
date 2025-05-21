@@ -2,19 +2,22 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { useNBAEverythingStore } from '@/store';
-import { SearchBar } from '@/components/common';
-import { NBATeam, NBATeamStats } from '@/types';
+import { useNBAEverythingStore } from '@/app/_store';
+import { SearchBar } from '../../common';
+import { NBATeam, NBATeamStats } from '@/app/_types';
+import { getCurrentTeams, getTeamSeasonData } from '@/app/_api/get';
 
 export default function NBAEverythingTeamSearch() {
   const { selectedSeason, selectedTeam, setSelectedTeam } = useNBAEverythingStore();
   const { data: currentTeamsData, isPending: isCurrentTeamsPending } = useQuery<NBATeam[]>({
     queryKey: ['getCurrentTeams'],
+    queryFn: getCurrentTeams,
   });
 
   const { isPending: isCurrentTeamSeasonPending } = useQuery<NBATeamStats>({
     enabled: !!(selectedTeam?.id && selectedSeason),
     queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
+    queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
   });
 
   const searchBarTeamOptions = currentTeamsData?.map(team => ({

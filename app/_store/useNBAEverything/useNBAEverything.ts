@@ -1,19 +1,24 @@
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { NBAGame, NBATeam, NBASelectedMode } from '@/app/_types';
+import { NBAGame, NBATeam, NBATeamStats, NBASelectedMode } from '@/app/_types';
 
 type NBAEverythingState = {
   selectedGame?: NBAGame;
   selectedMode: NBASelectedMode;
   selectedSeason: number;
   selectedTeam?: NBATeam;
-  selectedTeamStats: number;
-  setSelectedGame: (selectedGame?: NBAGame) => void;
+  selectedTeamStats?: number;
+  currentTeamSeasonData?: NBATeamStats;
+  nextCursor?: number;
+  setSelectedGame: (game?: NBAGame) => void;
+  setSelectedSeason: (season: number) => void;
   setSelectedMode: (selectedMode: NBASelectedMode) => void;
-  setSelectedSeason: (selectedSeason: number) => void;
-  setSelectedTeam: (selectedTeam: NBATeam) => void;
-  setSelectedTeamStats: (selectedTeamStats: number) => void;
+  setSelectedTeam: (team: NBATeam) => void;
+  setSelectedTeamStats: (team?: number) => void;
+  setCurrentTeamSeasonData: (data: NBATeamStats) => void;
+  appendCurrentTeamSeasonData: (data: NBATeamStats) => void;
+  setNextCursor: (cursor: number | undefined) => void;
 };
 
 const useNBAEverythingStore = create<NBAEverythingState>()(
@@ -22,11 +27,22 @@ const useNBAEverythingStore = create<NBAEverythingState>()(
       selectedMode: 'light',
       selectedSeason: 2024,
       selectedTeamStats: 0,
-      setSelectedGame: selectedGame => set({ selectedGame }),
+      setSelectedGame: game => set({ selectedGame: game }),
       setSelectedMode: selectedMode => set({ selectedMode }),
-      setSelectedTeam: selectedTeam => set({ selectedTeam }),
-      setSelectedSeason: selectedSeason => set({ selectedSeason }),
-      setSelectedTeamStats: selectedTeamStats => set({ selectedTeamStats }),
+      setSelectedTeam: team => set({ selectedTeam: team }),
+      setSelectedSeason: season => set({ selectedSeason: season }),
+      setSelectedTeamStats: team => set({ selectedTeamStats: team }),
+      setCurrentTeamSeasonData: data => set({ currentTeamSeasonData: data }),
+      appendCurrentTeamSeasonData: data =>
+        set(state => ({
+          currentTeamSeasonData: state.currentTeamSeasonData
+            ? {
+                ...state.currentTeamSeasonData,
+                gameData: [...state.currentTeamSeasonData.gameData, ...data.gameData],
+              }
+            : data,
+        })),
+      setNextCursor: cursor => set({ nextCursor: cursor }),
     }),
     {
       name: 'nba-everything-session',

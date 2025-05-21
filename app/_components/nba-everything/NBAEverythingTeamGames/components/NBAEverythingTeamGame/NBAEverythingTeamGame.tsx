@@ -17,14 +17,10 @@ export default function NBAEverythingTeamGame({
   rowIndex,
   style,
 }: NBAEverythingTeamGameProps) {
-  const { selectedSeason, selectedTeam } = useNBAEverythingStore();
-  const { data: currentTeamSeasonData } = useQuery<NBATeamStats>({
-    enabled: !!(selectedTeam?.id && selectedSeason),
-    queryKey: ['getTeamSeasonData', selectedSeason, selectedTeam?.id],
-  });
+  const { selectedTeam, currentTeamSeasonData } = useNBAEverythingStore();
 
   const gameData = currentTeamSeasonData?.gameData;
-  const gameIndex = rowIndex * 4 + columnIndex;
+  const gameIndex = rowIndex;
 
   const game = gameData?.[gameIndex];
   const gameUrl = game?.id ? `/game/${game?.id}` : '';

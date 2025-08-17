@@ -1,19 +1,26 @@
 import axios from 'axios';
 import { NBATeam } from '@/types';
 
-const getTeamSeasonData = async ({ season, teamId }: { season?: number; teamId?: number }) => {
+const getTeamSeasonData = async ({
+  season,
+  teamId,
+  cursor,
+}: {
+  season?: number;
+  teamId?: number;
+  cursor?: number;
+}) => {
   const seasonAveragesOptions = {
     method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/games/${teamId}/${season}`,
+    url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/games/${teamId}/${season}${cursor ? `?cursor=${cursor}` : ''}`,
   };
 
   try {
     const response = await axios.request(seasonAveragesOptions);
-
     return response.data.data || [];
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to fetch current teams');
+    throw new Error('Failed to fetch team season data');
   }
 };
 
@@ -25,7 +32,6 @@ const getCurrentTeams = async (): Promise<NBATeam[]> => {
 
   try {
     const response = await axios.request(teamOptions);
-
     return response.data.data;
   } catch (error) {
     console.error(error);

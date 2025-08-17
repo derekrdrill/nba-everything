@@ -1,18 +1,14 @@
 .game-dialog-panel {
     @apply
-        fixed
-        flex 
-        flex-col 
-        min-h-[86vh]
-        justify-between
-        mx-96
-        rounded-md
-        shadow-lg
-        top-[8%] 
-        w-[90%]
-        sm:top-[10%]
+        fixed 
+        top-4 
+        bottom-4 
+        left-2 
+        right-2 
+        overflow-auto 
         sm:w-full
-        md:container
-        md:min-h-[80vh]
+        md:container 
         md:mx-auto
+        lg:bottom-12
+        lg:top-12
 }

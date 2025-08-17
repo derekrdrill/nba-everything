@@ -106,18 +106,19 @@ export default function SearchBar({
           }}
         >
           {options?.map(option => (
-            <ListboxOption
-              className={classNames('cursor-pointer p-2', {
-                'border border-gray-100 hover:bg-blue-300': selectedMode === 'team',
-                'border-b-2 border-gray-100 hover:bg-blue-200': selectedMode === 'light',
-                'border border-gray-600 hover:bg-purple-200 hover:text-black':
-                  selectedMode === 'dark',
-              })}
-              key={option.value}
-              value={option.value}
-            >
-              {option.label}
-            </ListboxOption>
+            <div key={option.value}>
+              <ListboxOption
+                className={classNames('cursor-pointer p-2', {
+                  'border border-gray-100 hover:bg-blue-300': selectedMode === 'team',
+                  'border-b-2 border-gray-100 hover:bg-blue-200': selectedMode === 'light',
+                  'border border-gray-600 hover:bg-purple-200 hover:text-black':
+                    selectedMode === 'dark',
+                })}
+                value={option.value}
+              >
+                {option.label}
+              </ListboxOption>
+            </div>
           ))}
         </ListboxOptions>
       </Listbox>

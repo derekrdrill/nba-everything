@@ -20,12 +20,20 @@
     @apply bg-sky-500 text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700
 }
 
+.btn-danger {
+    @apply bg-red-500 text-white data-[hover]:bg-red-700 data-[active]:bg-red-700
+}
+
 .btn-primary-outline {
     @apply border-[1px] text-emerald-700 !border-emerald-700 data-[hover]:bg-emerald-700 data-[hover]:text-white
 }
 
 .btn-secondary-outline {
     @apply border-[1px] text-sky-500 !border-sky-500 data-[hover]:bg-sky-500 data-[hover]:text-white
+}
+
+.btn-danger-outline {
+    @apply border-[1px] text-red-500 !border-red-500 data-[hover]:bg-red-500 data-[hover]:text-white
 }
 
 /* button variations */
@@ -75,4 +83,28 @@
 
 .btn-secondary-lg-outline {
     @apply btn-lg btn-secondary-outline
+}
+
+.btn-danger-sm {
+    @apply btn-sm btn-danger
+}
+
+.btn-danger-sm-outline {
+    @apply btn-sm btn-danger-outline
+}
+
+.btn-danger-md {
+    @apply btn-md btn-danger
+}
+
+.btn-danger-md-outline {
+    @apply btn-md btn-danger-outline
+}
+
+.btn-danger-lg {
+    @apply btn-lg btn-danger
+}
+
+.btn-danger-lg-outline {
+    @apply btn-lg btn-danger-outline
 }

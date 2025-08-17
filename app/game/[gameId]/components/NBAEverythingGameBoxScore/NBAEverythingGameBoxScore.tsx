@@ -35,16 +35,16 @@ export default function NBAEverythingGameBoxScore() {
 
   return (
     <>
-      <h2 className='text-2xl text-center sticky top-0 z-50 w-full'>Box Score</h2>
-      <div className='flex gap-16 justify-between pb-16 sm:pb-0'>
+      <h2 className='text-2xl text-center w-full'>Box Score</h2>
+      <div className='flex gap-16 justify-between pb-0.5 sm:pb-0'>
         <NBAEverythingBoxScoreGrid
-          containerStyles={classNames('h-[260px] w-full lg:w-1/2 lg:block', {
+          containerStyles={classNames('h-[30vh] w-full lg:w-1/2 lg:block', {
             hidden: selectedTeamStats === 1,
           })}
           rowData={getStatRows({ boxScoreData: nbaGameStats?.visitorTeam.boxScoreDataShort })}
         />
         <NBAEverythingBoxScoreGrid
-          containerStyles={classNames('h-[260px] w-full lg:w-1/2 lg:block', {
+          containerStyles={classNames('h-[30vh] w-full lg:w-1/2 lg:block', {
             hidden: selectedTeamStats === 0,
           })}
           rowData={getStatRows({ boxScoreData: nbaGameStats?.homeTeam.boxScoreDataShort })}

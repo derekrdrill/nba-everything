@@ -22,7 +22,7 @@ export default function NBAEverythingTeamSearch() {
 
   const searchBarTeamOptions = currentTeamsData?.map(team => ({
     label: team.full_name,
-    value: team.id.toString(),
+    value: team.id?.toString(),
   }));
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function NBAEverythingTeamSearch() {
           setSelectedTeam(selectedTeam);
         }
       }}
-      value={selectedTeam?.id.toString() ?? '1'}
+      value={selectedTeam?.id?.toString() ?? '1'}
     />
   );
 }

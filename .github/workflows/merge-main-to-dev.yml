@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.NBA_EVERYTHING_GH_TOKEN }}
+          ssh-key: ${{ secrets.NBA_EVERYTHING_GH_TOKEN }}
 
       - name: Set up Git
         run: |
@@ -26,5 +26,5 @@ jobs:
       - name: Merge main into development
         run: |
           git checkout development
-          git merge main --allow-unrelated-histories
+          git merge main -m "⛙ backmerge main to development" --allow-unrelated-histories 
           git push origin development

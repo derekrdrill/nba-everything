@@ -29,27 +29,6 @@ export default function NBAEverythingTeamDetail() {
 
   return (
     <div className='grid grid-cols-5 gap-4'>
-      {/* <div className='col-span-full flex justify-center md:col-span-2'>
-        {isTeamDataPending && (
-          <ShimmerDiv
-            className='h-80 rounded w-full sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
-            height={0}
-            loading
-            mode='light'
-            width={0}
-          />
-        )}
-        {!isTeamDataPending && selectedTeam && (
-          <NBAEverythingTeamLogo
-            height={0}
-            imageStyles={classNames('h-auto w-32', {
-              'bg-gray-700 py-4 px-6 rounded': selectedMode === 'dark',
-            })}
-            team={selectedTeam}
-            width={0}
-          />
-        )}
-      </div> */}
       <div className='col-span-full md:col-span-3'>
         {isTeamDataPending && (
           <div className='flex flex-col gap-2'>

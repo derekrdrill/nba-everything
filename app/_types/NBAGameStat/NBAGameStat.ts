@@ -14,6 +14,8 @@ type NBAGameStat = {
     draft_round: number;
     draft_number: number;
     team_id: number;
+    proper_last_name: string;
+    head_shot: string;
   };
   total: number;
 };

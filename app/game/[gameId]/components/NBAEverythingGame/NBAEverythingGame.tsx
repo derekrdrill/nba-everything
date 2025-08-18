@@ -53,9 +53,12 @@ export default function NBAEverythingGame() {
       const gameId = pathName.split('/')[2];
       const game = currentTeamSeasonData?.gameData.find(game => game?.id === Number(gameId));
 
+      const selectedTeamId = selectedTeam?.id;
+      const hasHomeSelectedTeam = selectedGame?.home_team?.id === selectedTeamId;
       setSelectedGame(game);
+      setSelectedTeamStats(hasHomeSelectedTeam ? 1 : 0);
     }
-  }, [pathName, currentTeamSeasonData]);
+  }, [pathName, currentTeamSeasonData, selectedGame, selectedTeam]);
 
   if (isCurrentTeamSeasonPending) {
     return <div>Loading...</div>;
@@ -67,7 +70,7 @@ export default function NBAEverythingGame() {
 
   return (
     <Dialog
-      className='flex items-center justify-center pb-16'
+      className='absolute flex items-center justify-center pb-16 z-10'
       onClose={() => setSelectedGame(undefined)}
       open={!isCurrentTeamSeasonPending && !!selectedGame}
     >
@@ -136,7 +139,7 @@ export default function NBAEverythingGame() {
           </div>
         </div>
         {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
-        <div className='p-6'>
+        <div className='p-3 md:p-6'>
           {!isNBAGameStatsPending && (
             <div className='flex flex-col gap-4'>
               <NBAEverythingGameStatLeaders />

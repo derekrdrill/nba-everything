@@ -9,15 +9,15 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 const statColumns: ColDef<NBABoxScoreShort>[] = [
   { field: 'player', pinned: 'left', filter: 'agTextColumnFilter' },
-  { field: 'min', headerName: 'MIN', sort: 'desc' },
-  { field: 'pts', headerName: 'PTS' },
-  { field: 'ast', headerName: 'AST' },
-  { field: 'reb', headerName: 'REB' },
-  { field: 'stl', headerName: 'STL' },
-  { field: 'blk', headerName: 'BLK' },
-  { field: 'fg%', headerName: 'FG%' },
-  { field: '3p%', headerName: '3P%' },
-  { field: 'to', headerName: 'TO' },
+  { field: 'min', headerName: 'MIN', sort: 'desc', width: 85 },
+  { field: 'pts', headerName: 'PTS', width: 85 },
+  { field: 'ast', headerName: 'AST', width: 85 },
+  { field: 'reb', headerName: 'REB', width: 85 },
+  { field: 'stl', headerName: 'STL', width: 85 },
+  { field: 'blk', headerName: 'BLK', width: 85 },
+  { field: 'fg%', headerName: 'FG%', width: 85 },
+  { field: '3p%', headerName: '3P%', width: 85 },
+  { field: 'to', headerName: 'TO', width: 85 },
 ];
 
 type NBAEverythingBoxScoreGridProps = {

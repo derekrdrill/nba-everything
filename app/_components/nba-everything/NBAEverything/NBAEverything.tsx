@@ -63,16 +63,16 @@ export default function NBAEverything() {
         </div>
         <div className='col-span-full md:col-span-1'>
           {isCurrentTeamSeasonAvgsPending && (
-            <div className='flex flex-col gap-8 md:flex-row'>
+            <div className='flex flex-col gap-8 lg:flex-row'>
               <ShimmerDiv
-                className='h-12 rounded w-full md:h-[400px] md:w-[18%]'
+                className='h-20 rounded w-full lg:h-[475px] lg:w-[12%]'
                 height={0}
                 loading
                 mode='light'
                 width={0}
               />
               <ShimmerDiv
-                className='h-80 rounded w-full md:h-[400px] md:w-[82%]'
+                className='h-[360px] rounded w-full lg:h-[475px] lg:w-[88%]'
                 height={0}
                 loading
                 mode='light'
@@ -81,7 +81,7 @@ export default function NBAEverything() {
             </div>
           )}
           {!isCurrentTeamSeasonAvgsPending && (
-            <div className='grid grid-cols-12 gap-8'>
+            <div className='grid grid-cols-12 gap-2 lg:gap-8'>
               <NBAEverythingSeasonAverages />
               <NBAEverythingTeamGames />
             </div>

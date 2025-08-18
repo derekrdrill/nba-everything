@@ -28,7 +28,7 @@ export default function NBAEverythingSeasonAverages() {
   }
 
   return (
-    <div className='col-span-full flex flex-row gap-3 md:flex-col md:col-span-3 lg:col-span-2'>
+    <div className='col-span-full flex flex-row gap-3 lg:flex-col lg:col-span-2'>
       <NBASeasonAverage
         statValue={`${currentTeamSeasonData?.wins}-${currentTeamSeasonData?.losses}`}
         statTitle='W-L'

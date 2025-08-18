@@ -34,7 +34,7 @@ export default function NBAEverythingGameBoxScore() {
   });
 
   return (
-    <>
+    <div>
       <h2 className='text-2xl text-center w-full'>Box Score</h2>
       <div className='flex gap-16 justify-between pb-0.5 sm:pb-0'>
         <NBAEverythingBoxScoreGrid
@@ -50,6 +50,6 @@ export default function NBAEverythingGameBoxScore() {
           rowData={getStatRows({ boxScoreData: nbaGameStats?.homeTeam.boxScoreDataShort })}
         />
       </div>
-    </>
+    </div>
   );
 }

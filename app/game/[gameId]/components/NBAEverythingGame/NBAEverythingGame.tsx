@@ -11,6 +11,7 @@ import {
   NBAEverythingGameShimmer,
   NBAEverythingGameStatLeaders,
   NBAEverythingGameStatus,
+  NBAEverythingGameSummary,
   NBAEverythingGameTeamAndLogo,
   NBAEverythingGameTeamScore,
 } from '@/app/game/[gameId]/components';
@@ -39,9 +40,14 @@ export default function NBAEverythingGame() {
     queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
   });
 
-  const { isPending: isNBAGameStatsPending } = useQuery<{
+  const { data: gameData, isPending: isNBAGameStatsPending } = useQuery<{
     homeTeam: NBAGameStats;
     visitorTeam: NBAGameStats;
+    gameSummary: {
+      insight: string;
+      keyHighlights: string[];
+      overview: string;
+    };
   }>({
     enabled: !!selectedGame?.id,
     queryKey: ['getGameStats', selectedGame?.id],
@@ -141,9 +147,14 @@ export default function NBAEverythingGame() {
         {isNBAGameStatsPending && <NBAEverythingGameShimmer />}
         <div className='p-3 md:p-6'>
           {!isNBAGameStatsPending && (
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-6'>
               <NBAEverythingGameStatLeaders />
               <NBAEverythingGameBoxScore />
+              <NBAEverythingGameSummary
+                insight={gameData?.gameSummary.insight}
+                keyHighlights={gameData?.gameSummary.keyHighlights}
+                overview={gameData?.gameSummary.overview}
+              />
             </div>
           )}
         </div>

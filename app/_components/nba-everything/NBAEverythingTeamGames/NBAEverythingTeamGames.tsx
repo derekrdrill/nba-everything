@@ -102,7 +102,7 @@ export default function NBAEverythingTeamGames() {
   };
 
   return (
-    <div ref={containerRef} className='col-span-full md:col-span-9 lg:col-span-10'>
+    <div ref={containerRef} className='col-span-full lg:col-span-10'>
       <h2
         className={classNames('text-2xl', {
           'text-white': selectedMode === 'dark',

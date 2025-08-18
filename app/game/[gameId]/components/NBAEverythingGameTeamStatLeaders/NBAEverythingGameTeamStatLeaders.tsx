@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { NBAGameStat } from '@/types';
 
 type GameModalTeamStatLeadersProps = {
@@ -12,26 +13,51 @@ export default function NBAEverythingGameTeamStatLeaders({
   homeOrVisitor,
   statLeaders,
 }: GameModalTeamStatLeadersProps) {
+  const isHome = homeOrVisitor === 'home';
+  const isVisitor = homeOrVisitor === 'visitor';
+
   return (
     <div
       className={classNames('flex flex-col justify-between lg:block', containerStyles, {
-        'lg:justify-end': homeOrVisitor === 'home',
-        'lg:justify-start': homeOrVisitor === 'visitor',
+        'lg:justify-end': isHome,
+        'lg:justify-start': isVisitor,
       })}
     >
       {statLeaders?.map(statLeader => (
-        <p key={`home-leader-${statLeader.type}`} className='flex gap-2 justify-between'>
+        <p
+          key={`home-leader-${statLeader.type}`}
+          className='flex gap-2 items-center justify-between'
+        >
           <span
-            className={classNames('order-1', {
-              'lg:order-1': homeOrVisitor === 'home',
-              'lg:order-3': homeOrVisitor === 'visitor',
+            className={classNames({
+              'lg:order-1': isHome,
+              'lg:order-4': isVisitor,
             })}
-          >{`${statLeader.player.first_name[0]}. ${statLeader.player.last_name}`}</span>
-          <span className='hidden order-2 lg:block'> - </span>
+          >
+            {statLeader.player.head_shot ? (
+              <img
+                className='flex rounded-md'
+                src={statLeader.player.head_shot}
+                height={48}
+                width={48}
+              />
+            ) : (
+              <UserCircleIcon height={48} width={48} />
+            )}
+          </span>
+          <span
+            className={classNames('flex order-1', {
+              'lg:order-2': isHome,
+              'lg:order-3': isVisitor,
+            })}
+          >
+            {`${statLeader.player.first_name[0]}. 
+              ${statLeader.player.proper_last_name ?? statLeader.player.last_name}`}
+          </span>
           <span
             className={classNames('font-bold order-3', {
-              'lg:order-1': homeOrVisitor === 'visitor',
-              'lg:order-3': homeOrVisitor === 'home',
+              'lg:order-1': isVisitor,
+              'lg:order-4': isHome,
             })}
           >
             {statLeader.total}{' '}

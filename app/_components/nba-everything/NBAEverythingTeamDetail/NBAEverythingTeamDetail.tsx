@@ -29,14 +29,15 @@ export default function NBAEverythingTeamDetail() {
 
   return (
     <div className='grid grid-cols-5 gap-4'>
-      <div className='col-span-full md:col-span-3'>
+      <div className='col-span-full'>
         {isTeamDataPending && (
           <div className='flex flex-col gap-2'>
-            <ShimmerDiv className='rounded' height={45} loading mode='light' width={'90%'} />
-            <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
-            <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
-            <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
-            <ShimmerDiv className='rounded' height={20} loading mode='light' width={'80%'} />
+            <ShimmerDiv className='h-80 rounded w-full' height={0} loading mode='light' width={0} />
+            <ShimmerDiv className='rounded w-full h-12' height={0} loading mode='light' width={0} />
+            <ShimmerDiv className='rounded w-full h-4' height={0} loading mode='light' width={0} />
+            <ShimmerDiv className='rounded w-full h-4' height={0} loading mode='light' width={0} />
+            <ShimmerDiv className='rounded w-full h-4' height={0} loading mode='light' width={0} />
+            <ShimmerDiv className='rounded w-full h-4' height={0} loading mode='light' width={0} />
           </div>
         )}
         {!isTeamDataPending && selectedTeam && (
@@ -56,19 +57,10 @@ export default function NBAEverythingTeamDetail() {
             }}
           >
             <div className='col-span-full flex gap-4 items-center md:col-span-2 md:flex-col md:items-start'>
-              {isTeamDataPending && (
-                <ShimmerDiv
-                  className='h-80 rounded w-full sm:h-64 sm:w-64 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48'
-                  height={0}
-                  loading
-                  mode='light'
-                  width={0}
-                />
-              )}
               {!isTeamDataPending && selectedTeam && (
                 <NBAEverythingTeamLogo
                   height={0}
-                  imageStyles={classNames('h-auto w-32 md:w-64', {
+                  imageStyles={classNames('h-auto w-32 md:w-48 lg:w-64', {
                     'bg-gray-700 py-4 px-6 rounded': selectedMode === 'dark',
                   })}
                   team={selectedTeam}

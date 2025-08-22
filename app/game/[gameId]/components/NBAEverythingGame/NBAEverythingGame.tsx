@@ -54,6 +54,13 @@ export default function NBAEverythingGame() {
     queryFn: () => getGameStats({ gameId: selectedGame?.id }),
   });
 
+  const gameSummary = gameData?.gameSummary;
+  const gameSummaryOverview = gameSummary?.overview;
+  const gameSummaryHighlights = gameSummary?.keyHighlights;
+  const gameSummaryInsight = gameSummary?.insight;
+  const hasNBAGameSummary =
+    gameSummaryOverview && gameSummaryHighlights?.length && gameSummaryInsight;
+
   useEffect(() => {
     if (pathName.includes('game')) {
       const gameId = pathName.split('/')[2];
@@ -66,12 +73,8 @@ export default function NBAEverythingGame() {
     }
   }, [pathName, currentTeamSeasonData, selectedGame, selectedTeam]);
 
-  if (isCurrentTeamSeasonPending) {
-    return <div>Loading...</div>;
-  }
-
   if (!currentTeamSeasonData) {
-    return null;
+    router.push('/');
   }
 
   return (
@@ -150,11 +153,13 @@ export default function NBAEverythingGame() {
             <div className='flex flex-col gap-6'>
               <NBAEverythingGameStatLeaders />
               <NBAEverythingGameBoxScore />
-              <NBAEverythingGameSummary
-                insight={gameData?.gameSummary.insight}
-                keyHighlights={gameData?.gameSummary.keyHighlights}
-                overview={gameData?.gameSummary.overview}
-              />
+              {hasNBAGameSummary && (
+                <NBAEverythingGameSummary
+                  insight={gameSummaryInsight}
+                  keyHighlights={gameSummaryHighlights}
+                  overview={gameSummaryOverview}
+                />
+              )}
             </div>
           )}
         </div>

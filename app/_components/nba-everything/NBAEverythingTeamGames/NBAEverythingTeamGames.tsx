@@ -90,7 +90,13 @@ export default function NBAEverythingTeamGames() {
   const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
     if (index === gameData?.length) {
       return (
-        <div style={style} className='flex items-center justify-center bg-[#f0f0e0] p-4 border'>
+        <div
+          style={style}
+          className={classNames('flex items-center justify-center p-4', {
+            'bg-gray-200': selectedMode !== 'dark',
+            'bg-gray-500': selectedMode === 'dark',
+          })}
+        >
           <div className='animate-pulse flex items-center gap-2'>
             <div className='h-4 w-4 bg-gray-300 rounded-full'></div>
             <div className='h-4 w-24 bg-gray-300 rounded'></div>
@@ -125,7 +131,6 @@ export default function NBAEverythingTeamGames() {
           itemCount={totalItems}
           itemSize={140}
           width={containerWidth}
-          style={{ backgroundColor: '#f0f0f0' }}
           onItemsRendered={handleScroll}
         >
           {Row}

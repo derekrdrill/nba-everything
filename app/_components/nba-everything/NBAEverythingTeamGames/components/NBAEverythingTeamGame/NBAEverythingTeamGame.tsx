@@ -17,7 +17,7 @@ export default function NBAEverythingTeamGame({
   rowIndex,
   style,
 }: NBAEverythingTeamGameProps) {
-  const { selectedTeam, currentTeamSeasonData } = useNBAEverythingStore();
+  const { selectedTeam, selectedMode, currentTeamSeasonData } = useNBAEverythingStore();
 
   const gameData = currentTeamSeasonData?.gameData;
   const gameIndex = rowIndex;
@@ -39,8 +39,21 @@ export default function NBAEverythingTeamGame({
   if (gameData && gameIndex >= gameData?.length) return null;
 
   return (
-    <div style={style} className='bg-[#f0f0e0] flex flex-col gap-4 p-2 border'>
-      <div className='flex flex-col gap-2'>
+    <div
+      style={style}
+      className={classNames(
+        'flex flex-col gap-4 p-2 border-b border-t-0 border-l-0 border-r-0 border-b-gray-700',
+        {
+          'bg-gray-200': selectedMode !== 'dark',
+          'bg-gray-500': selectedMode === 'dark',
+        },
+      )}
+    >
+      <div
+        className={classNames('flex flex-col gap-2', {
+          'text-gray-300': selectedMode === 'dark',
+        })}
+      >
         <div
           className={classNames('flex justify-between', {
             'text-green-500': isWinAsVisitor,

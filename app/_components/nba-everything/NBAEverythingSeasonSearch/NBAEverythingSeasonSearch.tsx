@@ -3,7 +3,7 @@ import { useNBAEverythingStore } from '@/store';
 import { SearchBar } from '@/components/common';
 import { NBA_SEASONS } from '@/components/nba-everything/NBAEverythingSeasonSearch/constants';
 import { NBATeam, NBATeamStats } from '@/types';
-import { getCurrentTeams, getTeamSeasonData } from '@/app/_api/get';
+import { getCurrentTeams, getTeamSeasonData, getSeasons } from '@/app/_api/get';
 
 export default function NBAEverythingSeasonSearch() {
   const { selectedSeason, selectedTeam, setSelectedSeason } = useNBAEverythingStore();
@@ -19,15 +19,23 @@ export default function NBAEverythingSeasonSearch() {
     queryFn: () => getTeamSeasonData({ season: selectedSeason, teamId: selectedTeam?.id }),
   });
 
-  const searchBarSeasonOptions = NBA_SEASONS.map(season => ({
-    label: season.display_year,
-    value: season.year.toString(),
+  const { data: seasonData, isPending: isSeasonsPending } = useQuery<
+    { label: string; value: string }[]
+  >({
+    enabled: true,
+    queryKey: ['getSeasons'],
+    queryFn: getSeasons,
+  });
+
+  const searchBarSeasonOptions = seasonData?.map(season => ({
+    label: season.label,
+    value: season.value,
   }));
 
   return (
     <SearchBar
       options={searchBarSeasonOptions}
-      isDisabled={isCurrentTeamsPending || isCurrentTeamSeasonPending}
+      isDisabled={isCurrentTeamsPending || isCurrentTeamSeasonPending || isSeasonsPending}
       handleOptionSelect={value => {
         const selectedSeason = NBA_SEASONS?.find(season => season.year === Number(value))?.year;
         if (selectedSeason) {

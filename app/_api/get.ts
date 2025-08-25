@@ -39,4 +39,20 @@ const getCurrentTeams = async (): Promise<NBATeam[]> => {
   }
 };
 
-export { getTeamSeasonData, getCurrentTeams };
+const getSeasons = async (): Promise<{ label: string; value: string }[]> => {
+  const seasonOptions = {
+    method: 'GET',
+    url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/seasons`,
+  };
+
+  try {
+    const response = await axios.request(seasonOptions);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch seasons');
+  }
+};
+
+export { getTeamSeasonData, getCurrentTeams, getSeasons };

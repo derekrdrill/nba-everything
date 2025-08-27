@@ -27,8 +27,8 @@ export default function NBASeasonAverage({ statValue, statTitle }: NBASeasonAver
               : '',
         }}
       >
-        <p className='text-2xl'>{statTitle}</p>
-        <p>{statValue}</p>
+        <p className='text-xl'>{statTitle}</p>
+        <p className='text-sm'>{statValue}</p>
       </div>
     )
   );

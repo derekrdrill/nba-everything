@@ -25,7 +25,7 @@ export default function SearchBar({
   isDisabled,
   options,
   rounded = 'md',
-  size = 'md',
+  size = 'sm',
   value,
 }: SearchBarProps) {
   const hasOptionsLoaded = !!options?.length;

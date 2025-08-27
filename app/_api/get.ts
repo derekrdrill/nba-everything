@@ -47,7 +47,6 @@ const getSeasons = async (): Promise<{ label: string; value: string }[]> => {
 
   try {
     const response = await axios.request(seasonOptions);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -55,4 +54,25 @@ const getSeasons = async (): Promise<{ label: string; value: string }[]> => {
   }
 };
 
-export { getTeamSeasonData, getCurrentTeams, getSeasons };
+const getPlayerStatsByTeamAndSeason = async ({
+  season,
+  teamId,
+}: {
+  season: number;
+  teamId?: number;
+}) => {
+  const playerStatsByTeamAndSeasonOptions = {
+    method: 'GET',
+    url: `${process.env.NEXT_PUBLIC_NBA_EVERYTHING_API_URL}/player/season-stats/${teamId}/${season}`,
+  };
+
+  try {
+    const response = await axios.request(playerStatsByTeamAndSeasonOptions);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch seasons');
+  }
+};
+
+export { getTeamSeasonData, getCurrentTeams, getSeasons, getPlayerStatsByTeamAndSeason };

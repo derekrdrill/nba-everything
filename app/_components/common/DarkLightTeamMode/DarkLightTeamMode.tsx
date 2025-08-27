@@ -15,7 +15,7 @@ export default function DarkLightTeamMode() {
       }}
       selectedIndex={selectedMode === 'light' ? 0 : selectedMode === 'dark' ? 1 : 2}
     >
-      <TabList className='mb-6 flex gap-0'>
+      <TabList className='flex gap-0'>
         <Tab className='tab border-[1px] border-gray-200 py-0.5 p-2 rounded-l-md data-[selected]:bg-blue-200 data-[selected]:border-blue-400'>
           <SunIcon color={selectedMode === 'light' ? 'black' : 'white'} height={20} width={20} />
         </Tab>

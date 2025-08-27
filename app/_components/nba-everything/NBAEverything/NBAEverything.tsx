@@ -10,6 +10,7 @@ import {
   NBAEverythingTeamDetail,
   NBAEverythingTeamGames,
   NBAEverythingTeamSearch,
+  NBAEverythingPlayerSeasonStats,
 } from '@/components/nba-everything';
 import { getCurrentTeams, getTeamSeasonData } from '@/api/get';
 import { getTeamModeMainColor } from '@/helpers';
@@ -88,6 +89,7 @@ export default function NBAEverything() {
           )}
         </div>
       </div>
+      <NBAEverythingPlayerSeasonStats />
     </div>
   );
 }

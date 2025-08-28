@@ -1,4 +1,6 @@
+'use client';
 import classNames from 'classnames';
+import { ShimmerDiv } from 'shimmer-effects-react';
 import { useQuery } from '@tanstack/react-query';
 import { useNBAEverythingStore } from '@/store';
 import { getPlayerStatsByTeamAndSeason } from '@/api/get';
@@ -22,22 +24,29 @@ function NBAEverythingPlayerSeasonStats({}: NBAEverythingPlayerSeasonStatsProps)
 
   return (
     <>
-      <h2
-        className={classNames('text-2xl text-center', {
-          'text-white': selectedMode === 'dark',
-        })}
-        style={{
-          color:
-            selectedMode === 'team'
-              ? `#${getTeamModeSecondaryColor({
-                  primaryColor: selectedTeam?.colors.primary,
-                  secondaryColor: selectedTeam?.colors.secondary,
-                })}`
-              : '',
-        }}
-      >
-        Player Season Stats
-      </h2>
+      {isNBAPlayerStatsPending && (
+        <div className='flex items-center justify-center'>
+          <ShimmerDiv className='h-8 rounded w-52' height={0} loading mode='light' width={0} />
+        </div>
+      )}
+      {!isNBAPlayerStatsPending && (
+        <h2
+          className={classNames('text-2xl text-center', {
+            'text-white': selectedMode === 'dark',
+          })}
+          style={{
+            color:
+              selectedMode === 'team'
+                ? `#${getTeamModeSecondaryColor({
+                    primaryColor: selectedTeam?.colors.primary,
+                    secondaryColor: selectedTeam?.colors.secondary,
+                  })}`
+                : '',
+          }}
+        >
+          Player Season Stats
+        </h2>
+      )}
       <NBAEverythingBoxScoreGrid
         containerStyles='h-96'
         isLoading={isNBAPlayerStatsPending}

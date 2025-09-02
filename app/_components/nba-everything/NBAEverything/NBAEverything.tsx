@@ -34,10 +34,10 @@ export default function NBAEverything() {
     if (selectedMode === 'light') {
       document.body.setAttribute('style', '');
       document.body.setAttribute('style', 'background-color: white;');
-      document.querySelector('.header-text')?.setAttribute('style', 'color: black;');
+      document.querySelector('.header-text')?.setAttribute('style', 'color: #212121;');
     } else if (selectedMode === 'dark') {
       document.body.setAttribute('style', '');
-      document.body.setAttribute('style', 'background-color: black;');
+      document.body.setAttribute('style', 'background-color: #212121;');
       document.querySelector('.header-text')?.setAttribute('style', 'color: white;');
     } else if (selectedMode === 'team' && selectedTeam) {
       document.body.setAttribute('style', '');

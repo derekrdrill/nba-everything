@@ -86,7 +86,7 @@ export default function NBAEverythingGame() {
       <DialogPanel
         className={classNames('game-dialog-panel', {
           'bg-white': selectedMode === 'light',
-          'bg-gray-900 text-white': selectedMode === 'dark',
+          'bg-[#212121] text-white': selectedMode === 'dark',
         })}
         style={{
           ...(selectedMode === 'team' && {
@@ -98,7 +98,7 @@ export default function NBAEverythingGame() {
         <div
           className={classNames('top-0 sticky z-50', {
             'bg-white': selectedMode === 'light',
-            'bg-gray-900 text-white': selectedMode === 'dark',
+            'bg-[#212121] text-white': selectedMode === 'dark',
           })}
           style={{
             ...(selectedMode === 'team' && {

@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import classNames from 'classnames';
-import { useQuery } from '@tanstack/react-query';
 
 import { useNBAEverythingStore } from '@/store';
 import { NBAEverythingTeamLogo } from '@/components/nba-everything';
-import { NBATeamStats } from '@/types';
 
 type NBAEverythingTeamGameProps = {
   columnIndex: number;
@@ -49,15 +47,13 @@ export default function NBAEverythingTeamGame({
         },
       )}
     >
-      <div
-        className={classNames('flex flex-col gap-2', {
-          'text-gray-300': selectedMode === 'dark',
-        })}
-      >
+      <div className='flex flex-col gap-2'>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': isWinAsVisitor,
-            'text-red-500': isLossAsVisitor,
+            'text-green-500': isWinAsVisitor && selectedMode !== 'dark',
+            'text-red-600': isLossAsVisitor && selectedMode !== 'dark',
+            'text-green-400': isWinAsVisitor && selectedMode === 'dark',
+            'text-red-900': isLossAsVisitor && selectedMode === 'dark',
           })}
         >
           <div className='flex gap-3'>
@@ -68,8 +64,10 @@ export default function NBAEverythingTeamGame({
         </div>
         <div
           className={classNames('flex justify-between', {
-            'text-green-500': isWinAsHome,
-            'text-red-500': isLossAsHome,
+            'text-green-500': isWinAsHome && selectedMode !== 'dark',
+            'text-red-600': isLossAsHome && selectedMode !== 'dark',
+            'text-green-400': isWinAsHome && selectedMode === 'dark',
+            'text-red-900': isLossAsHome && selectedMode === 'dark',
           })}
         >
           <div className='flex gap-3'>

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Dialog, DialogPanel, Tab, TabGroup, TabList } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/20/solid';
 
 import { useNBAEverythingStore } from '@/store';
 import { getGameStats } from '@/app/game/[gameId]/api/get';
@@ -109,13 +110,13 @@ export default function NBAEverythingGame() {
         >
           <div className='flex justify-end p-4'>
             <Button
-              className='btn-danger-md'
+              className='btn-danger-sm'
               onClick={() => {
                 setSelectedGame(undefined);
                 router.push('/');
               }}
             >
-              X
+              <XMarkIcon height={20} width={14} />
             </Button>
           </div>
           <div className='flex flex-col gap-4 px-14 md:flex-row md:justify-around md:mb-12 md:px-24'>
@@ -137,10 +138,30 @@ export default function NBAEverythingGame() {
               selectedIndex={selectedTeamStats}
             >
               <TabList className='mb-6 flex gap-0'>
-                <Tab className='tab border-[1px] border-gray-200 py-0.5 px-2 rounded-l-md data-[selected]:bg-blue-200 data-[selected]:border-blue-400'>
+                <Tab
+                  className={classNames(
+                    'tab border-[1px] border-gray-200 py-0.5 px-2 rounded-l-md',
+                    {
+                      'data-[selected]:bg-blue-200 data-[selected]:border-blue-400':
+                        selectedMode !== 'dark',
+                      'data-[selected]:bg-blue-400 data-[selected]:border-blue-600':
+                        selectedMode === 'dark',
+                    },
+                  )}
+                >
                   {selectedGame?.visitor_team?.abbreviation}
                 </Tab>
-                <Tab className='tab border-[1px] border-gray-200 py-0.5 px-2 rounded-r-md data-[selected]:bg-blue-200 data-[selected]:border-blue-400'>
+                <Tab
+                  className={classNames(
+                    'tab border-[1px] border-gray-200 py-0.5 px-2 rounded-r-md',
+                    {
+                      'data-[selected]:bg-blue-200 data-[selected]:border-blue-400':
+                        selectedMode !== 'dark',
+                      'data-[selected]:bg-blue-400 data-[selected]:border-blue-600':
+                        selectedMode === 'dark',
+                    },
+                  )}
+                >
                   {selectedGame?.home_team?.abbreviation}
                 </Tab>
               </TabList>
